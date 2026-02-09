@@ -4,3 +4,13 @@
     margin: 0;
     padding: 0;
 }
+
+.darkMode{
+    background-color: rgb(67, 67, 67);
+    color : White;
+}
+
+.lightMode{
+    background-color: white;
+    color : black;
+}

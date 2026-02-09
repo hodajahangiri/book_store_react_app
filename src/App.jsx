@@ -13,11 +13,14 @@ import Contact from "./pages/Contact/Contact";
 import About from "./pages/About/About";
 import Privacy from "./pages/Privacy/Privacy";
 import Terms from "./pages/Terms/Terms";
+import { useTheme } from "./contexts/ThemeContext";
 
 function App() {
 
+  const { isDarkMode } = useTheme()
+
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className={`flex flex-col min-h-screen ${isDarkMode ? "darkMode" : "lightMode"}`}>
       <Header className="basis-1/3" />
       <div className="flex-1">
         <Routes>

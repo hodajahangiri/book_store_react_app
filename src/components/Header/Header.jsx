@@ -1,5 +1,7 @@
 import { useNavigate, NavLink } from "react-router-dom"
 import { useState } from "react";
+import ThemeSwitch from "../MUIThemeSwitch/ThemeSwitch";
+import { useTheme } from "../../contexts/ThemeContext";
 
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -23,6 +25,8 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 function Header() {
 
     const navigate = useNavigate();
+
+    const {isDarkMode, toggleTheme} = useTheme()
 
     const [auth, setAuth] = useState(true);
     const handleChange = (event) => {
@@ -49,7 +53,7 @@ function Header() {
 
     return (
 
-        <AppBar sx={{ backgroundColor: 'green', borderBottom: '2px solid black' }} position="static">
+        <AppBar sx={{ backgroundColor: 'green', borderBottom: '2px solid black', color: isDarkMode ? 'black' : 'white' }} position="static">
             <Container maxWidth="xl"
             >
                 <FormGroup>
@@ -115,7 +119,7 @@ function Header() {
                                 navigate('/');
                                 setAnchorElNav(null);
                             }}>
-                                <Typography sx={{ textAlign: 'center' }}>Home</Typography>
+                                <Typography sx={{ textAlign: 'center'}}>Home</Typography>
                             </MenuItem>
                             <MenuItem onClick={() => {
                                 navigate('/about');
@@ -131,6 +135,7 @@ function Header() {
                             </MenuItem>
                         </Menu>
                     </Box>
+
                     <MenuBookIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
                         variant="h5"
@@ -154,23 +159,24 @@ function Header() {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         <Button
                             onClick={() => navigate('/')}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{ my: 2, display: 'block', color: isDarkMode ? 'black' : 'white' }}
                         >
                             Home
                         </Button>
                         <Button
                             onClick={() => navigate('/about')}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{ my: 2, display: 'block' , color: isDarkMode ? 'black' : 'white'}}
                         >
                             About
                         </Button>
                         <Button
                             onClick={() => navigate('/contact')}
-                            sx={{ my: 2, color: 'white', display: 'block' }}
+                            sx={{ my: 2, display: 'block' , color: isDarkMode ? 'black' : 'white'}}
                         >
                             Contact Us
                         </Button>
                     </Box>
+
                     {auth ?
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
@@ -223,6 +229,7 @@ function Header() {
                         :
                         <NavLink to="/login">Log in</NavLink>
                     }
+                    <ThemeSwitch onClick={toggleTheme}/>
                 </Toolbar>
             </Container>
         </AppBar>
