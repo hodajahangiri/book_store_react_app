@@ -132,8 +132,7 @@ function Header() {
                             </MenuItem>
                         </Menu>
                     </Box>
-
-                    <MenuBookIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    
                     <Typography
                         variant="h5"
                         noWrap
@@ -150,7 +149,7 @@ function Header() {
                         }}
                         onClick={() => navigate('/')}
                     >
-                        Book Store
+                       <MenuBookIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
