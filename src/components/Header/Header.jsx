@@ -1,11 +1,9 @@
 import { useNavigate, NavLink } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ThemeSwitch from "../MUIThemeSwitch/ThemeSwitch";
 import { useTheme } from "../../contexts/ThemeContext";
+import { useAuth } from "../../contexts/AuthContext";
 
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -20,21 +18,32 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import PersonIcon from '@mui/icons-material/Person';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import Badge from "@mui/material/Badge";
 
 
 function Header() {
 
     const navigate = useNavigate();
 
-    const {isDarkMode, toggleTheme} = useTheme()
-
-    const [auth, setAuth] = useState(true);
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
+    const { isDarkMode, toggleTheme } = useTheme();
+    const { isAuthenticated, getUserCart, logout } = useAuth();
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const [userCart, setUserCart] = useState([]);
+
+    useEffect(() => {
+        const getUserShoppingCart = async () => {
+            if (isAuthenticated) {
+                const response = await getUserCart();
+                const cartItems = await response.cart_books;
+                setUserCart(cartItems);
+            }
+        }
+        getUserShoppingCart();
+    }, [isAuthenticated])
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -56,18 +65,6 @@ function Header() {
         <AppBar sx={{ backgroundColor: 'green', borderBottom: '2px solid black', color: isDarkMode ? 'black' : 'white' }} position="static">
             <Container maxWidth="xl"
             >
-                <FormGroup>
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                checked={auth}
-                                onChange={handleChange}
-                                aria-label="login switch"
-                            />
-                        }
-                        label={auth ? 'Logout' : 'Login'}
-                    />
-                </FormGroup>
                 <Toolbar disableGutters>
                     <MenuBookIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
@@ -119,18 +116,18 @@ function Header() {
                                 navigate('/');
                                 setAnchorElNav(null);
                             }}>
-                                <Typography sx={{ textAlign: 'center'}}>Home</Typography>
+                                <Typography sx={{ textAlign: 'center' }}>Home</Typography>
                             </MenuItem>
                             <MenuItem onClick={() => {
                                 navigate('/about');
                                 setAnchorElNav(null);
-                                }}>
+                            }}>
                                 <Typography sx={{ textAlign: 'center' }}>About</Typography>
                             </MenuItem>
                             <MenuItem onClick={() => {
                                 navigate('/contact');
                                 setAnchorElNav(null);
-                                }}>
+                            }}>
                                 <Typography sx={{ textAlign: 'center' }}>Contact Us</Typography>
                             </MenuItem>
                         </Menu>
@@ -165,24 +162,34 @@ function Header() {
                         </Button>
                         <Button
                             onClick={() => navigate('/about')}
-                            sx={{ my: 2, display: 'block' , color: isDarkMode ? 'black' : 'white'}}
+                            sx={{ my: 2, display: 'block', color: isDarkMode ? 'black' : 'white' }}
                         >
                             About
                         </Button>
                         <Button
                             onClick={() => navigate('/contact')}
-                            sx={{ my: 2, display: 'block' , color: isDarkMode ? 'black' : 'white'}}
+                            sx={{ my: 2, display: 'block', color: isDarkMode ? 'black' : 'white' }}
                         >
                             Contact Us
                         </Button>
                     </Box>
 
-                    {auth ?
+                    {isAuthenticated ?
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">
                                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                    <Avatar alt="User" src="/static/images/avatar/2.jpg" />
+                                    <Avatar alt="User" sx={{ bgcolor: "white", border: "2px solid black" }}>
+                                        <PersonIcon sx={{ color: "gray" }} />
+                                    </Avatar>
                                 </IconButton>
+                                {
+                                    userCart.length > 0 && <IconButton onClick={() => navigate('/cart')} aria-label="cart">
+                                        <Badge badgeContent={userCart.length} sx={{ color: "white" }}>
+                                            <ShoppingCartIcon />
+                                        </Badge>
+                                    </IconButton>
+
+                                }
                             </Tooltip>
                             <Menu
                                 sx={{
@@ -209,13 +216,13 @@ function Header() {
                                 <MenuItem onClick={() => {
                                     navigate('/profile');
                                     setAnchorElUser(null);
-                                    }}>
+                                }}>
                                     <Typography sx={{ textAlign: 'center' }}>Profile</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     navigate('/cart');
                                     setAnchorElUser(null);
-                                    }}>
+                                }}>
                                     <Typography sx={{ textAlign: 'center' }}>Cart</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
@@ -224,12 +231,18 @@ function Header() {
                                 }}>
                                     <Typography sx={{ textAlign: 'center' }}>Orders</Typography>
                                 </MenuItem>
+                                <MenuItem onClick={() => {
+                                    logout();
+                                    setAnchorElUser(null);
+                                }}>
+                                    <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
+                                </MenuItem>
                             </Menu>
                         </Box>
                         :
                         <NavLink to="/login">Log in</NavLink>
                     }
-                    <ThemeSwitch onClick={toggleTheme}/>
+                    <ThemeSwitch onClick={toggleTheme} />
                 </Toolbar>
             </Container>
         </AppBar>
