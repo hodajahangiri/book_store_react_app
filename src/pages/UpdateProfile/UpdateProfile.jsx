@@ -1,8 +1,14 @@
-import React from 'react'
+import UserForm from "../../components/UserForm/UserForm";
+import { useAuth } from "../../contexts/AuthContext";
 
 function UpdateProfile() {
+
+  const {updateProfile} = useAuth();
+
   return (
-    <div>UpdateProfile</div>
+    <>
+    <UserForm submitFunction={updateProfile} isRegisterForm={false}/>
+    </>
   )
 }
 

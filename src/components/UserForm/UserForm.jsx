@@ -22,6 +22,8 @@ function UserForm({ submitFunction, isRegisterForm }) {
     });
 
     useEffect(() => {
+        console.log("isRegisterForm",isRegisterForm)
+        console.log("user", user)
         if (!isRegisterForm && user) {
             setFormData(prev => ({ ...prev, ...user }));
             setFormData(prev => ({ ...prev, ["password"]: "" }));
@@ -55,10 +57,9 @@ function UserForm({ submitFunction, isRegisterForm }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const response = await submitFunction(formData);
-        if(response === 201){
-            if(isRegisterForm){
-                navigate('/profile');
-            }
+        console.log("UserForm : handleSubmit : response", response)
+        if(response === 201 || response === 200){
+            navigate('/profile');
         }
     }
 

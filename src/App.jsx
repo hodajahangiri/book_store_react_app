@@ -13,6 +13,8 @@ import Contact from "./pages/Contact/Contact";
 import About from "./pages/About/About";
 import Privacy from "./pages/Privacy/Privacy";
 import Terms from "./pages/Terms/Terms";
+import EditAddresses from "./pages/EditAddresses/EditAddresses";
+import EditPayments from "./pages/EditPayments/EditPayments";
 import { useTheme } from "./contexts/ThemeContext";
 
 function App() {
@@ -32,13 +34,15 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/update" element={<UpdateProfile />} />
+          <Route path="/user/addresses" element={<EditAddresses />} />
+          <Route path="/user/payments" element={<EditPayments />} />
           <Route path="/orders" element={<Order />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>
       </div>
-      <Footer className="basis-1/3"/>
+      <Footer className="basis-1/3" />
     </div>
   )
 }

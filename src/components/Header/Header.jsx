@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ThemeSwitch from "../MUIThemeSwitch/ThemeSwitch";
 import { useTheme } from "../../contexts/ThemeContext";
 import { useAuth } from "../../contexts/AuthContext";
+import { useProfile } from "../../contexts/UserProfileContext";
 
 
 import AppBar from '@mui/material/AppBar';
@@ -28,7 +29,8 @@ function Header() {
     const navigate = useNavigate();
 
     const { isDarkMode, toggleTheme } = useTheme();
-    const { isAuthenticated, getUserCart, logout } = useAuth();
+    const { isAuthenticated, logout } = useAuth();
+    const {getUserCart} = useProfile();
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);

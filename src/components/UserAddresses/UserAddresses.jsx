@@ -1,9 +1,9 @@
 import AddressCard from "../AddressCard/AddressCard";
-import { useAuth } from "../../contexts/AuthContext";
+import { useProfile } from "../../contexts/UserProfileContext";
 
 function UserAddresses() {
 
-  const { userAddresses } = useAuth(); 
+  const { userAddresses } = useProfile(); 
 
   return (
     <div className="mt-10! flex flex-col wrap-normal items-center gap-7">
