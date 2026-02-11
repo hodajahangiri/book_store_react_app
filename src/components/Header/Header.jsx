@@ -38,12 +38,14 @@ function Header() {
         const getUserShoppingCart = async () => {
             if (isAuthenticated) {
                 const response = await getUserCart();
-                const cartItems = await response.cart_books;
-                setUserCart(cartItems);
+                if (response){
+                    const cartItems = await response.cart_books;
+                    setUserCart(cartItems);
+                }
             }
         }
         getUserShoppingCart();
-    }, [isAuthenticated])
+    }, [isAuthenticated])//Have to change to cart whenever cart change it has to be changed
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -182,8 +184,8 @@ function Header() {
                                     </Avatar>
                                 </IconButton>
                                 {
-                                    userCart.length > 0 && <IconButton onClick={() => navigate('/cart')} aria-label="cart">
-                                        <Badge badgeContent={userCart.length} sx={{ color: "white" }}>
+                                    userCart?.length > 0 && <IconButton onClick={() => navigate('/cart')} aria-label="cart">
+                                        <Badge badgeContent={userCart?.length} sx={{ color: "white" }}>
                                             <ShoppingCartIcon />
                                         </Badge>
                                     </IconButton>

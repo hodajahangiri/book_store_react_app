@@ -65,6 +65,7 @@ export const AuthProvider = ({ children }) => {
 
     // register user
     const register = async (registerData) => {
+        console.log("REGISTER FUNCTION")
         try {
             const response = await fetch(`${ApiUrl}users`, {
                 method: "POST",
@@ -85,6 +86,8 @@ export const AuthProvider = ({ children }) => {
             } else {
                 console.error('Something went wrong.');
             }
+            console.log("Response Status", response.status)
+            return response.status;
         } catch (error) {
             console.error("Error: ", error);
         }
@@ -170,7 +173,15 @@ export const AuthProvider = ({ children }) => {
             })
             if (response.ok) {
                 const responseData = await response.json();
-                return responseData.user_cart;
+                if(responseData.user_cart){
+                    return responseData.user_cart
+                }else{
+                    return responseData.message ;
+                }
+            } else if (response.status === 403){
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }

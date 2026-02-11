@@ -47,13 +47,13 @@ function LoginForm() {
 
     return (
         <div className="my-20! flex flex-col wrap-normal items-center gap-7">
-            <form className="flex flex-col w-full sm:w-1/2 border-2 border-amber-500 bg-white shadow-2xl shadow-amber-200 rounded-2xl p-8! mx-30!"
+            <form className="flex flex-col w-full md:w-1/2 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8! mx-30!"
             onSubmit={handleSubmit}>
                 <div className="w-9/10 p-5!">
                     <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="email">
-                        Username
+                        Email
                     </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
                         name="email"
                         id="email"
                         type="text"
@@ -64,10 +64,10 @@ function LoginForm() {
                         {emailError && <p className="text-red-800"> {emailError}</p>}
                 </div>
                 <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="email">
+                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="password">
                         Password
                     </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700  bg-white leading-tight focus:outline-none focus:shadow-outline"
                         name="password"
                         id="password"
                         type="password"
@@ -80,7 +80,7 @@ function LoginForm() {
                     <SubmitButton textButton="Login"/>
                 </div>
                 <div className="w-9/10 p-5!">
-                    <p>Don't have an account? <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 cursor-pointer" to='/register'>Sign up here!</Link></p>
+                    <p className="text-black">Don't have an account? <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 cursor-pointer" to='/register'>Sign up here!</Link></p>
                 </div>
             </form>
         </div>

@@ -1,8 +1,12 @@
-import React from 'react'
+import UserForm from "../../components/UserForm/UserForm";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Register() {
+
+  const {register} = useAuth();
+
   return (
-    <div>Register</div>
+    <UserForm submitFunction={register} isRegisterForm={true}/>
   )
 }
 
