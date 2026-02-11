@@ -17,6 +17,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const [user, setUser] = useState(null);
+    const [userAddresses, setUserAddresses] = useState([]);
+    const [userPaymentMethods, setUserPaymentMethods] = useState([]);
 
     //Get user data from local storage 
     useEffect(() => {
@@ -65,7 +67,6 @@ export const AuthProvider = ({ children }) => {
 
     // register user
     const register = async (registerData) => {
-        console.log("REGISTER FUNCTION")
         try {
             const response = await fetch(`${ApiUrl}users`, {
                 method: "POST",
@@ -86,7 +87,6 @@ export const AuthProvider = ({ children }) => {
             } else {
                 console.error('Something went wrong.');
             }
-            console.log("Response Status", response.status)
             return response.status;
         } catch (error) {
             console.error("Error: ", error);
@@ -152,11 +152,14 @@ export const AuthProvider = ({ children }) => {
             if (response.ok) {
                 const responseData = await response.json();
                 setUser(responseData.user_data);
+                setUserAddresses(responseData.user_addresses);
+                setUserPaymentMethods(responseData.user_payments);
                 return responseData;
             } else {
                 console.error("Something went wrong, try again...");
             }
-        } catch(error){
+            // return response.status;
+        } catch (error) {
             console.error("Error: ", error);
         }
     }
@@ -173,19 +176,19 @@ export const AuthProvider = ({ children }) => {
             })
             if (response.ok) {
                 const responseData = await response.json();
-                if(responseData.user_cart){
+                if (responseData.user_cart) {
                     return responseData.user_cart
-                }else{
-                    return responseData.message ;
+                } else {
+                    return responseData.message;
                 }
-            } else if (response.status === 403){
+            } else if (response.status === 403) {
                 const responseData = await response.json();
                 alert(`${responseData.message}, You have to log in again`);
                 logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
-        } catch(error){
+        } catch (error) {
             console.error("Error: ", error);
         }
     }
@@ -207,7 +210,7 @@ export const AuthProvider = ({ children }) => {
             } else {
                 console.error("Something went wrong, try again...");
             }
-        } catch(error){
+        } catch (error) {
             console.error("Error: ", error);
         }
     }
@@ -229,7 +232,7 @@ export const AuthProvider = ({ children }) => {
             } else {
                 console.error("Something went wrong, try again...");
             }
-        } catch(error){
+        } catch (error) {
             console.error("Error: ", error);
         }
     }
@@ -237,6 +240,10 @@ export const AuthProvider = ({ children }) => {
     const value = {
         token,
         user,
+        userAddresses,
+        setUserAddresses,
+        userPaymentMethods,
+        setUserPaymentMethods,
         login,
         logout,
         register,

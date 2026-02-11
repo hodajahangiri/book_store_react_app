@@ -235,6 +235,7 @@ function Header() {
                                 <MenuItem onClick={() => {
                                     logout();
                                     setAnchorElUser(null);
+                                    navigate('/');
                                 }}>
                                     <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
                                 </MenuItem>

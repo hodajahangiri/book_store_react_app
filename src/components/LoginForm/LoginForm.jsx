@@ -38,7 +38,6 @@ function LoginForm() {
             alert("Please Fill Out All fields...")
         }else{
             const response = await login(credentialData);
-            console.log(response)
             if(response === 200){
                 navigate('/');
             }
