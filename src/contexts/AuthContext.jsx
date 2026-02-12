@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useState } from 'react';
+import { API_BASE_URL} from '../config.jsx';
 
 //Step 1
 //Create the context
 const AuthContext = createContext();
 
-const ApiUrl = "http://127.0.0.1:5000/";
 
 //Step 2
 //Create useAuth hook to consume this context
@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     // Login function
     const login = async (credentialData) => {
         try {
-            const response = await fetch(`${ApiUrl}users/login`, {
+            const response = await fetch(`${API_BASE_URL}users/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
     // register user
     const register = async (registerData) => {
         try {
-            const response = await fetch(`${ApiUrl}users`, {
+            const response = await fetch(`${API_BASE_URL}users`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
     //deleteUser function
     const deleteUser = async () => {
         try {
-            const response = await fetch(`${ApiUrl}users`, {
+            const response = await fetch(`${API_BASE_URL}users`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',
@@ -116,7 +116,7 @@ export const AuthProvider = ({ children }) => {
     // UpdateProfile function
     const updateProfile = async (updateData) => {
         try {
-            const response = await fetch(`${ApiUrl}users`, {
+            const response = await fetch(`${API_BASE_URL}users`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',

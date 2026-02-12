@@ -1,12 +1,11 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { useAuth } from './AuthContext';
+import { API_BASE_URL} from '../config.jsx';
 
 
 //Step 1
 //Create the context
 const UserProfileContext = createContext();
-
-const ApiUrl = "http://127.0.0.1:5000/";
 
 //Step 2
 //Create useAuth hook to consume this context
@@ -25,7 +24,7 @@ export const UserProfileProvider = ({ children }) => {
     // Get User
     const getUserProfile = async () => {
         try {
-            const response = await fetch(`${ApiUrl}users/profile`, {
+            const response = await fetch(`${API_BASE_URL}users/profile`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -50,7 +49,7 @@ export const UserProfileProvider = ({ children }) => {
     const addAddress = async (addressData) => {
         console.log("addAddress : addressData", addressData)
         try {
-            const response = await fetch(`${ApiUrl}addresses`, {
+            const response = await fetch(`${API_BASE_URL}addresses`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -61,7 +60,7 @@ export const UserProfileProvider = ({ children }) => {
             if (response.ok) {
                 console.log("addAddress : response.ok", response)
                 const responseData = await response.json();
-                console(responseData.message);
+                console.log(responseData.message);
                 console.log("addAddress : responseData.message", responseData.message)
                 getUserProfile();
                 // setUserAddresses(prev => [...prev, responseData.address_data])
@@ -80,7 +79,7 @@ export const UserProfileProvider = ({ children }) => {
         console.log("updateAddress : addressId", addressId)
         console.log("updateAddress : addressData", addressData)
         try {
-            const response = await fetch(`${ApiUrl}addresses/${addressId}`, {
+            const response = await fetch(`${API_BASE_URL}addresses/${addressId}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,7 +107,7 @@ export const UserProfileProvider = ({ children }) => {
     const deleteAddress = async (addressId) => {
         console.log("addressID", addressId)
         try {
-            const response = await fetch(`${ApiUrl}addresses/${addressId}`, {
+            const response = await fetch(`${API_BASE_URL}addresses/${addressId}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',
@@ -133,7 +132,7 @@ export const UserProfileProvider = ({ children }) => {
     const addPayment = async (paymentData) => {
         console.log("addPayments : paymentData", paymentData)
         try {
-            const response = await fetch(`${ApiUrl}payments`, {
+            const response = await fetch(`${API_BASE_URL}payments`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
@@ -159,7 +158,7 @@ export const UserProfileProvider = ({ children }) => {
         console.log("updatePayment : paymentId", paymentId)
         console.log("updatePayment : paymentData", paymentData)
         try {
-            const response = await fetch(`${ApiUrl}payments/${paymentId}`, {
+            const response = await fetch(`${API_BASE_URL}payments/${paymentId}`, {
                 method: "PUT",
                 headers: {
                     'Content-Type': 'application/json',
@@ -185,7 +184,7 @@ export const UserProfileProvider = ({ children }) => {
     const deletePayment = async (paymentId) => {
         console.log("paymentID", paymentId)
         try {
-            const response = await fetch(`${ApiUrl}payments/${paymentId}`, {
+            const response = await fetch(`${API_BASE_URL}payments/${paymentId}`, {
                 method: "DELETE",
                 headers: {
                     'Content-Type': 'application/json',
@@ -209,7 +208,7 @@ export const UserProfileProvider = ({ children }) => {
     const getUserCart = async () => {
         console.log("getUserCart : token", token)
         try {
-            const response = await fetch(`${ApiUrl}users/carts`, {
+            const response = await fetch(`${API_BASE_URL}users/carts`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -241,7 +240,7 @@ export const UserProfileProvider = ({ children }) => {
     // Get User orders
     const getUserOrders = async () => {
         try {
-            const response = await fetch(`${ApiUrl}users/orders`, {
+            const response = await fetch(`${API_BASE_URL}users/orders`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -263,7 +262,7 @@ export const UserProfileProvider = ({ children }) => {
     // Get User favorites
     const getUserFavorites = async () => {
         try {
-            const response = await fetch(`${ApiUrl}users/favorites`, {
+            const response = await fetch(`${API_BASE_URL}users/favorites`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',

@@ -15,11 +15,14 @@ import Privacy from "./pages/Privacy/Privacy";
 import Terms from "./pages/Terms/Terms";
 import EditAddresses from "./pages/EditAddresses/EditAddresses";
 import EditPayments from "./pages/EditPayments/EditPayments";
+import BookDetails from "./pages/BookDetails/BookDetails";
 import { useTheme } from "./contexts/ThemeContext";
+import { useState } from "react";
 
 function App() {
 
-  const { isDarkMode } = useTheme()
+  const { isDarkMode } = useTheme();
+  const [loading, setLoading] = useState(true);
 
   return (
     <div className={`flex flex-col min-h-screen ${isDarkMode ? "darkMode" : "lightMode"}`}>
@@ -27,7 +30,7 @@ function App() {
       <div className="flex-1">
         <Routes>
           <Route path="*" element={<NotFound />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home loading={loading} setLoading={setLoading}/>} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
@@ -36,6 +39,7 @@ function App() {
           <Route path="/profile/update" element={<UpdateProfile />} />
           <Route path="/user/addresses" element={<EditAddresses />} />
           <Route path="/user/payments" element={<EditPayments />} />
+          <Route path="/book/details" element={<BookDetails />} />
           <Route path="/orders" element={<Order />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/privacy" element={<Privacy />} />
