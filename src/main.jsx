@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext.jsx';
 import { AuthProvider } from './contexts/AuthContext.jsx';
 import { UserProfileProvider } from './contexts/UserProfileContext.jsx';
+import { CartProvider } from './contexts/CartContext.jsx';
 
 
 createRoot(document.getElementById('root')).render(
@@ -14,7 +15,9 @@ createRoot(document.getElementById('root')).render(
       <ThemeProvider>
         <AuthProvider>
           <UserProfileProvider>
-            <App />
+            <CartProvider>
+              <App />
+            </CartProvider>
           </UserProfileProvider>
         </AuthProvider>
       </ThemeProvider>

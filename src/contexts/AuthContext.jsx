@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { API_BASE_URL} from '../config.jsx';
+import { useNavigate } from 'react-router-dom';
 
 //Step 1
 //Create the context
 const AuthContext = createContext();
+
 
 
 //Step 2
@@ -17,6 +19,8 @@ export const useAuth = () => {
 export const AuthProvider = ({ children }) => {
     const [token, setToken] = useState(null);
     const [user, setUser] = useState(null);
+
+    const navigate = useNavigate();
 
     //Get user data from local storage 
     useEffect(() => {
@@ -61,6 +65,7 @@ export const AuthProvider = ({ children }) => {
         setUser(null)
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        navigate('/');
     };
 
     // register user

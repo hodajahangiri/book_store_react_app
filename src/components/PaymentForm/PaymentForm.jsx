@@ -133,7 +133,7 @@ function PaymentForm({ submitFunction, payment, isAddForm }) {
                         name="expiry_year"
                         id="expiry_year"
                         type="number"
-                        placeholder="1-12"
+                        placeholder="Exp Year : 2026"
                         onChange={handleChange}
                         value={formData.expiry_year} />
                 </div>

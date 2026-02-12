@@ -38,8 +38,7 @@ function SearchBar({fetchBooks }) {
                     required
                     onChange={handleChange}
                     value={searchInput} />
-                <button type="submit" className="absolute end-2 bottom-1.5 p-1.5! text-white bg-blue-800 bg-brand hover:bg-blue-900 rounded-xl cursor-pointer"
-                >Search</button>
+                <button type="submit" className="absolute end-2 bottom-1.5 p-1.5! text-white bg-blue-800 bg-brand hover:bg-blue-900 rounded-xl cursor-pointer">Search</button>
             </div>
         </form>
     )

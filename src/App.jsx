@@ -5,7 +5,7 @@ import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
 import Profile from "./pages/Profile/Profile";
 import UpdateProfile from "./pages/UpdateProfile/UpdateProfile";
-import Order from "./pages/Order/Order";
+import Orders from "./pages/Orders/Orders";
 import Cart from "./pages/Cart/Cart";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
@@ -40,8 +40,8 @@ function App() {
           <Route path="/user/addresses" element={<EditAddresses />} />
           <Route path="/user/payments" element={<EditPayments />} />
           <Route path="/book/details" element={<BookDetails />} />
-          <Route path="/orders" element={<Order />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/cart" element={<Cart loading={loading} setLoading={setLoading}/>} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/terms" element={<Terms />} />
         </Routes>

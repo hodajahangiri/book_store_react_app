@@ -16,7 +16,7 @@ export const useProfile = () => {
 
 //Step 3
 export const UserProfileProvider = ({ children }) => {
-    const { token , setUser , logout } = useAuth();
+    const { token , setUser} = useAuth();
     const [userAddresses, setUserAddresses] = useState([]);
     const [userPaymentMethods, setUserPaymentMethods] = useState([]);
 
@@ -31,6 +31,7 @@ export const UserProfileProvider = ({ children }) => {
                     'Authorization': 'Bearer ' + token
                 }
             })
+            console.log("getUserProfile : RESPONSE", response)
             if (response.ok) {
                 const responseData = await response.json();
                 setUser(responseData.user_data);
@@ -63,9 +64,6 @@ export const UserProfileProvider = ({ children }) => {
                 console.log(responseData.message);
                 console.log("addAddress : responseData.message", responseData.message)
                 getUserProfile();
-                // setUserAddresses(prev => [...prev, responseData.address_data])
-                // setUser(responseData.user_data);
-                // localStorage.setItem("user", JSON.stringify(responseData.user_data));
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -203,40 +201,6 @@ export const UserProfileProvider = ({ children }) => {
         }
     } 
 
-
-    // Get User cart
-    const getUserCart = async () => {
-        console.log("getUserCart : token", token)
-        try {
-            const response = await fetch(`${API_BASE_URL}users/carts`, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                }
-            })
-            if (response.ok) {
-                console.log("getUserCart : response.ok", response)
-                const responseData = await response.json();
-                if (responseData.user_cart) {
-                    console.log("getUserCart : responseData.user_cart", responseData.user_cart)
-                    return responseData.user_cart
-                } else {
-                    console.log("getUserCart : responseData.message", responseData.message)
-                    return responseData.message;
-                }
-            } else if (response.status === 403) {
-                const responseData = await response.json();
-                alert(`${responseData.message}, You have to log in again`);
-                logout();
-            } else {
-                console.error("Something went wrong, try again...");
-            }
-        } catch (error) {
-            console.error("Error: ", error);
-        }
-    }
-
     // Get User orders
     const getUserOrders = async () => {
         try {
@@ -280,6 +244,27 @@ export const UserProfileProvider = ({ children }) => {
             console.error("Error: ", error);
         }
     }
+    // toggle Favorites
+    const toggleFavorites = async (bookId) => {
+        console.log("toggleFavorites : bookId : ", bookId)
+        try {
+            const response = await fetch(`${API_BASE_URL}favorites/${bookId}`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            if (response.ok) {
+                const responseData = await response.json();
+                alert(responseData.message)
+            } else {
+                console.error("Something went wrong, try again...");
+            }
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    }
 
     const value = {
         getUserProfile,
@@ -292,9 +277,9 @@ export const UserProfileProvider = ({ children }) => {
         updatePayment,
         deletePayment,
 
-        getUserCart,
         getUserOrders,
         getUserFavorites,
+        toggleFavorites,
         isAuthenticated: token ? true : false
     }
 

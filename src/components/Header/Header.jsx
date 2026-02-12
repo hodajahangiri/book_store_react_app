@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ThemeSwitch from "../MUIThemeSwitch/ThemeSwitch";
 import { useTheme } from "../../contexts/ThemeContext";
 import { useAuth } from "../../contexts/AuthContext";
-import { useProfile } from "../../contexts/UserProfileContext";
+import { useCart } from "../../contexts/CartContext";
 
 
 import AppBar from '@mui/material/AppBar';
@@ -30,24 +30,14 @@ function Header() {
 
     const { isDarkMode, toggleTheme } = useTheme();
     const { isAuthenticated, logout } = useAuth();
-    const {getUserCart} = useProfile();
+    const {getUserCart , cartItems} = useCart();
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
-    const [userCart, setUserCart] = useState([]);
 
     useEffect(() => {
-        const getUserShoppingCart = async () => {
-            if (isAuthenticated) {
-                const response = await getUserCart();
-                if (response){
-                    const cartItems = await response.cart_books;
-                    setUserCart(cartItems);
-                }
-            }
-        }
-        getUserShoppingCart();
-    }, [isAuthenticated])//Have to change to cart whenever cart change it has to be changed
+            getUserCart();
+    }, [isAuthenticated])
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -186,8 +176,8 @@ function Header() {
                                     </Avatar>
                                 </IconButton>
                                 {
-                                    userCart?.length > 0 && <IconButton onClick={() => navigate('/cart')} aria-label="cart">
-                                        <Badge badgeContent={userCart?.length} sx={{ color: "white" }}>
+                                    cartItems?.length > 0 && <IconButton onClick={() => navigate('/cart')} aria-label="cart">
+                                        <Badge badgeContent={cartItems?.length} sx={{ color: "white" }}>
                                             <ShoppingCartIcon />
                                         </Badge>
                                     </IconButton>

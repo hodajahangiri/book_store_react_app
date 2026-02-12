@@ -9,21 +9,18 @@ function Home({ loading, setLoading }) {
   const [books, setBooks] = useState([]);
 
   const fetchBooks = async (title) => {
-
     setLoading(true);
     let url = ''
     if (title) {
-      url = `https://www.googleapis.com/books/v1/volumes?q=${title}+intitle:keyes&maxResults=3&orderBy=relevance&key=${API_GOOGLE_KEY}`;
+      url = `https://www.googleapis.com/books/v1/volumes?q=${title}+intitle:keyes&maxResults=4&orderBy=relevance&key=${API_GOOGLE_KEY}`;
     } else {
       let randomIdx = Math.floor(Math.random() * 50);
-      url = `https://www.googleapis.com/books/v1/volumes?q=subject:fiction&startIndex=${randomIdx}&maxResults=3&key=${API_GOOGLE_KEY}`;
+      url = `https://www.googleapis.com/books/v1/volumes?q=subject:fiction&startIndex=${randomIdx}&maxResults=4&key=${API_GOOGLE_KEY}`;
     }
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log("DATA ITEMS", data.items)
       const booksData = data.items?.map((book) => {
-        console.log("FETCH BOOKS : dataItemsBook :", book)
         const volume = book.volumeInfo || {};
         return {
           title: volume.title,

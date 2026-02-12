@@ -1,25 +1,32 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
+
 function BookCard({ book }) {
 
     const navigate = useNavigate();
+    const {isAuthenticated} = useAuth();
 
     const readMoreClick = () => {
-        navigate('/book/details', { state: {
-            book: book
-        } })
+        if (!isAuthenticated){
+            alert("For seeing the book details to have to login first.")
+        }else{
+            navigate('/book/details', { state: {
+                book: book
+            } })
+        }
     }
 
     return (
         <div className="relative">
-            <div className="flex flex-col items-center w-full min-h-85 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl mx-5!">
+            <div className="flex flex-col items-center w-full min-h-80 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl mx-5!">
                 <img
-                    className="rounded-t-base w-40 h-60 rounded-b-xl"
+                    className="w-40 h-60 rounded-b-xl"
                     src={book?.image_link ? `${book.image_link}`
                         : "https://res.cloudinary.com/itimages/image/upload/f_auto,q_auto,w_800,c_limit/prd/splash_cover_art/pnpzt3hdlwrjssu7jeb8"}
                     alt={book?.title}
                     referrerPolicy="no-referrer"
                 />
-                <p className="mt-3! mx-3! text-lg text-center font-semibold tracking-tight text-heading">{book.title}</p>
+                <p className="mt-3! mx-3! text-sm text-center font-semibold tracking-tight text-heading text-black">{book.title}</p>
                 <div className="absolute flex flex-row gap-2 items-center end-2 bottom-1.5 cursor-pointer"
                 onClick={readMoreClick}>
                     <span className='text-blue-800 font-bold'> Read more </span>
