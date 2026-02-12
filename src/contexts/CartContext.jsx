@@ -24,7 +24,7 @@ export const CartProvider = ({ children }) => {
     useEffect(() => {
         console.log("USEEFFECT : CART_ITEMS", cartItems)
         const calculatedTotal = cartItems.reduce((sum, item) => {
-            return sum + item.price * item.quantity;
+            return sum + (item.book.price * item.quantity);
         }, 0);
         setTotal(calculatedTotal);
     }, [cartItems]);
@@ -100,7 +100,7 @@ export const CartProvider = ({ children }) => {
                     if (responseData.cart_books) {
                         console.log("getUserCart : responseData.user_cart", responseData.cart_books)
                         setCartItems(responseData.cart_books);
-                        // return responseData.cart_books
+                        return responseData.id //return the id of the cart
                     } else {
                         // console.log("getUserCart : responseData.message", responseData.message)
                         alert("getUserCart : responseData.message", responseData.message)

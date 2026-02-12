@@ -44,12 +44,6 @@ function BookDetails() {
     useEffect(() => { 
         // Add book to book Descriptions
         addBookToDB(book);
-
-        // like book 
-
-        // Add to Card
-
-
     }, []);
 
     return (
