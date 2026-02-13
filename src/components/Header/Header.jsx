@@ -213,6 +213,12 @@ function Header() {
                                     <Typography sx={{ textAlign: 'center' }}>Profile</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
+                                    navigate('/user/favorites');
+                                    setAnchorElUser(null);
+                                }}>
+                                    <Typography sx={{ textAlign: 'center' }}>Favorites</Typography>
+                                </MenuItem>
+                                <MenuItem onClick={() => {
                                     navigate('/cart');
                                     setAnchorElUser(null);
                                 }}>

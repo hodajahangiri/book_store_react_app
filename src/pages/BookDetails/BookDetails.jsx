@@ -3,6 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { API_BASE_URL } from '../../config';
 import BookDetailsCard from '../../components/BookDetailsCard/BookDetailsCard';
 import LayoutPhoto from '../../components/LayoutPhoto/LayoutPhoto';
+import Reviews from '../../components/Reviews/Reviews';
 
 function BookDetails() {
 
@@ -34,6 +35,7 @@ function BookDetails() {
             if (response.ok) {
                 const responseData = await response.json();
                 setBookInfo(responseData)
+                console.log("addBook : responseData : ", responseData)
             }
         } catch (error) {
             console.error("Error: ", error);
@@ -54,6 +56,7 @@ function BookDetails() {
             :
             <h2>Something Went wrong</h2> 
         }
+        {bookInfo && <Reviews bookId={bookInfo.id}/>}
         </>
     )
 }

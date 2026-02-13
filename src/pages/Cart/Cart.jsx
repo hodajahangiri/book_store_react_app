@@ -29,11 +29,12 @@ function Cart({ loading, setLoading }) {
           <CartCard key={cartBook.book.id} cartBook={cartBook} idx={idx + 1} />
         ))
         :
-        <div>
-          Your Cart Is Empty!!
+        <div className="font-bold text-2xl flex flex-col items-center">
+          <span>Your Cart Is Empty!!</span>
+          <span className="text-blue-600 cursor-pointer" onClick={() => navigate('/')}>Add Book to your cart</span>
         </div>
       }
-      {cartItems &&
+      {cartItems.length > 0 &&
         <div className='flex flex-col items-center w-full px-5! mt-9!'>
           <div className='col-span-2 text-black font-bold mb-6!'>Total: ${total.toFixed(2)}</div>
           <button className="w-full self-center bg-green-600 hover:bg-green-800 text-white font-extrabold py-2! px-4! rounded-xl cursor-pointer"

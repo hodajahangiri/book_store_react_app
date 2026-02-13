@@ -19,7 +19,7 @@ export const UserProfileProvider = ({ children }) => {
     const { token , setUser, logout} = useAuth();
     const [userAddresses, setUserAddresses] = useState([]);
     const [userPaymentMethods, setUserPaymentMethods] = useState([]);
-
+    const [bookReviews, setBookReviews] = useState([]);
 
     // Get User
     const getUserProfile = async () => {
@@ -40,7 +40,7 @@ export const UserProfileProvider = ({ children }) => {
                 setUser(responseData.user_data);
                 setUserAddresses(responseData.user_addresses);
                 setUserPaymentMethods(responseData.user_payments);
-            }else if (response.status === 403) {
+            } else if (response.status === 403) {
                     const responseData = await response.json();
                     alert(`${responseData.message}, You have to log in again`);
                     logout();
@@ -71,6 +71,10 @@ export const UserProfileProvider = ({ children }) => {
                 console.log(responseData.message);
                 console.log("addAddress : responseData.message", responseData.message)
                 getUserProfile();
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -100,6 +104,10 @@ export const UserProfileProvider = ({ children }) => {
                 getUserProfile()
                 // setUser(responseData.user_data);
                 // localStorage.setItem("user", JSON.stringify(responseData.user_data));
+            }else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -125,6 +133,10 @@ export const UserProfileProvider = ({ children }) => {
                 getUserProfile()
                 // setUser(responseData.user_data);
                 // localStorage.setItem("user", JSON.stringify(responseData.user_data));
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -150,6 +162,10 @@ export const UserProfileProvider = ({ children }) => {
                 const responseData = await response.json();
                 console.log("addPayments : responseData.message", responseData.message)
                 getUserProfile();
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -177,6 +193,10 @@ export const UserProfileProvider = ({ children }) => {
                 alert(responseData.message);
                 console.log("updatePayment : responseData.message", responseData.message)
                 getUserProfile()
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -200,6 +220,10 @@ export const UserProfileProvider = ({ children }) => {
                 const responseData = await response.json();
                 alert(responseData.message);
                 getUserProfile()
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -222,6 +246,10 @@ export const UserProfileProvider = ({ children }) => {
                 const responseData = await response.json();
                 console.log(responseData.user_favorites)
                 return responseData.user_favorites;
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -244,6 +272,10 @@ export const UserProfileProvider = ({ children }) => {
             if (response.ok) {
                 const responseData = await response.json();
                 alert(responseData.message)
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -252,6 +284,142 @@ export const UserProfileProvider = ({ children }) => {
         }
     }
 
+    // Get User reviews
+    const getUserReviews = async () => {
+        try {
+            const response = await fetch(`${API_BASE_URL}users/reviews`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log(responseData.user_reviews)
+                return responseData.user_reviews;
+            }else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
+            } else {
+                console.error("Something went wrong, try again...");
+            }
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    }
+
+    // Get Book Reviews
+    const getBookReviews = async (bookId) => {
+        console.log("Reviews : getBookReviews : bookId", bookId)
+        console.log("Reviews : getBookReviews : token", token)
+        try {
+            const response = await fetch(`${API_BASE_URL}reviews/book/${bookId}`, {
+                method: "GET",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            console.log("Reviews : getBookReviews : response", response)
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log(responseData.reviews);
+                setBookReviews(responseData.reviews);
+                return responseData.reviews;
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
+            } else {
+                console.error("Something went wrong, try again...");
+            }
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    }
+
+    // Add review
+    const addReview = async (bookId, reviewData) => {
+        console.log("UserProfileContext : addReview : bookId : ",bookId)
+        console.log("UserProfileContext : addReview : reviewData : ",reviewData)
+        try {
+            const response = await fetch(`${API_BASE_URL}reviews/${bookId}`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(reviewData)
+            })
+            console.log("UserProfileContext : addReview : response : ",response)
+            if (response.ok) {
+                const responseData = await response.json();
+                console.log("UserProfileContext : addReview : responseData : ",responseData)
+                getBookReviews(bookId);
+                // return responseData;
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
+            } else {
+                console.error("Something went wrong, try again...");
+            }
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    }
+
+    // Update reviews
+    const updateReview = async (reviewId, reviewData , bookId) => {
+        console.log("UserProfileContext : addReview : bookId : ",reviewId)
+        console.log("UserProfileContext : addReview : reviewData : ",reviewData)
+        try {
+            const response = await fetch(`${API_BASE_URL}reviews/${reviewId}`, {
+                method: "PUT",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                },
+                body: JSON.stringify(reviewData)
+            })
+            if (response.ok) {
+                const responseData = await response.json();
+                alert(responseData.message);
+                getBookReviews(bookId);
+                return response.status;
+            } else {
+                console.error("Something went wrong, try again...");
+            }
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    }
+
+    // Delete review
+    const deleteReview = async (reviewId , bookId) => {
+        try {
+            const response = await fetch(`${API_BASE_URL}reviews/${reviewId}`, {
+                method: "DELETE",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + token
+                }
+            })
+            if (response.ok) {
+                const responseData = await response.json();
+                alert(responseData.message);
+                getBookReviews(bookId);
+                return response.status;
+            } else {
+                console.error("Something went wrong, try again...");
+            }
+        } catch (error) {
+            console.error("Error: ", error);
+        }
+    }
+
+    
     const value = {
         getUserProfile,
         userAddresses,
@@ -264,6 +432,12 @@ export const UserProfileProvider = ({ children }) => {
         deletePayment,
         getUserFavorites,
         toggleFavorites,
+        getUserReviews,
+        getBookReviews,
+        bookReviews,
+        addReview,
+        updateReview,
+        deleteReview,
         isAuthenticated: token ? true : false
     }
 

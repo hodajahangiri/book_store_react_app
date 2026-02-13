@@ -8,6 +8,7 @@ import Profile from "./pages/Profile/Profile";
 import UpdateProfile from "./pages/UpdateProfile/UpdateProfile";
 import EditAddresses from "./pages/EditAddresses/EditAddresses";
 import EditPayments from "./pages/EditPayments/EditPayments";
+import Favorites from "./pages/Favorites/Favorites";
 import BookDetails from "./pages/BookDetails/BookDetails";
 import Cart from "./pages/Cart/Cart";
 import Checkout from "./pages/Checkout/Checkout";
@@ -37,6 +38,7 @@ function App() {
           <Route path="/profile/update" element={<UpdateProfile />} />
           <Route path="/user/addresses" element={<EditAddresses />} />
           <Route path="/user/payments" element={<EditPayments />} />
+          <Route path="/user/favorites" element={<Favorites />} />
           <Route path="/book/details" element={<BookDetails />} />
           <Route path="/cart" element={<Cart loading={loading} setLoading={setLoading}/>} />
           <Route path="/checkout" element={<Checkout loading={loading} setLoading={setLoading}/>}/>

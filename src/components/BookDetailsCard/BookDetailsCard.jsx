@@ -3,8 +3,11 @@ import { useProfile } from "../../contexts/UserProfileContext";
 import { useCart } from "../../contexts/CartContext";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import Rating from '@mui/material/Rating';
 
 function BookDetailsCard({ book }) {
+
+    console.log("BookDetailsCard : BOOK ", book)
 
     const {getUserFavorites , toggleFavorites} = useProfile();
     const [isLiked, setIsLiked] = useState(false);
@@ -14,9 +17,9 @@ function BookDetailsCard({ book }) {
         // Check user liked this or not 
         const isLiked = async(bookId) => {
             const response = await getUserFavorites();
-            console.log("USEEFFECT : RESPONSE : ", response)
+            console.log("USEEFFECT :isLiked : RESPONSE : ", response)
             if (response){
-                console.log("USEEFFECT : RESPONSE BOOKDESCRIPTIONS : ")
+                console.log("USEEFFECT : isLiked :  RESPONSE BOOKDESCRIPTIONS : ")
                 const existedBook = await response.find(item => item.book_description.id === bookId)
                 console.log("isLiked : existedBook", existedBook)
                 return existedBook ? setIsLiked(true) : setIsLiked(false)
@@ -28,7 +31,6 @@ function BookDetailsCard({ book }) {
     const handleLikeClick = () => {
         toggleFavorites(book.id);
         setIsLiked(prev => !prev)
-        // isLiked === true ? setIsLiked(false) : setIsLiked(true)
     }
 
     return (
@@ -39,7 +41,7 @@ function BookDetailsCard({ book }) {
                     onClick={handleLikeClick}/> 
                     : <FavoriteBorderIcon className="cursor-pointer" fontSize="large"
                     onClick={handleLikeClick}/>} </div>
-                <div className='grid grid-cols-2 items-start'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 items-start'>
                     <div className='flex flex-col items-start gap-2'>
                         <img className='w-40 h-60 rounded-xl border-2 border-black'
                             src={book?.image_link} alt={book?.title}
@@ -63,7 +65,7 @@ function BookDetailsCard({ book }) {
                             <p className='text-sm text-blue-800 font-bold'>Price:</p>
                             <p className='text-sm text-black font-bold'>${book?.price}</p>
                             <p className='text-sm text-blue-800 font-bold'>Rating:</p>
-                            <p className='text-sm text-black font-bold'>{book?.averageRating} / {book?.ratingsCount}</p>
+                            <Rating name="half-rating-reade" value={((book?.averageRating * 5)/book?.ratingsCount)} precision={0.5} readOnly />
                         </div>
                         <button className="mt-9! mr-3! p-2! w-2/3 self-end text-white bg-blue-800 bg-brand hover:bg-blue-900 rounded-xl cursor-pointer"
                             onClick={() => addToCart(book.id)}>Add to card</button>
