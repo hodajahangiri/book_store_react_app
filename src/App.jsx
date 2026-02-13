@@ -38,7 +38,7 @@ function App() {
           <Route path="/profile/update" element={<UpdateProfile />} />
           <Route path="/user/addresses" element={<EditAddresses />} />
           <Route path="/user/payments" element={<EditPayments />} />
-          <Route path="/user/favorites" element={<Favorites />} />
+          <Route path="/user/favorites" element={<Favorites loading={loading} setLoading={setLoading}/>} />
           <Route path="/book/details" element={<BookDetails />} />
           <Route path="/cart" element={<Cart loading={loading} setLoading={setLoading}/>} />
           <Route path="/checkout" element={<Checkout loading={loading} setLoading={setLoading}/>}/>

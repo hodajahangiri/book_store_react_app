@@ -234,6 +234,7 @@ export const UserProfileProvider = ({ children }) => {
     
     // Get User favorites
     const getUserFavorites = async () => {
+        console.log("getUserFavorites : function call")
         try {
             const response = await fetch(`${API_BASE_URL}users/favorites`, {
                 method: "GET",
@@ -242,7 +243,9 @@ export const UserProfileProvider = ({ children }) => {
                     'Authorization': 'Bearer ' + token
                 }
             })
+            console.log("getUserFavorites : response : ", response)
             if (response.ok) {
+                console.log("getUserFavorites : response.ok : ")
                 const responseData = await response.json();
                 console.log(responseData.user_favorites)
                 return responseData.user_favorites;
