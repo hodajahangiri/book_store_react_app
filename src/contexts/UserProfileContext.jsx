@@ -16,13 +16,15 @@ export const useProfile = () => {
 
 //Step 3
 export const UserProfileProvider = ({ children }) => {
-    const { token , setUser} = useAuth();
+    const { token , setUser, logout} = useAuth();
     const [userAddresses, setUserAddresses] = useState([]);
     const [userPaymentMethods, setUserPaymentMethods] = useState([]);
 
 
     // Get User
     const getUserProfile = async () => {
+        console.log("getUserProfile : token : ", token)
+
         try {
             const response = await fetch(`${API_BASE_URL}users/profile`, {
                 method: "GET",
@@ -33,11 +35,16 @@ export const UserProfileProvider = ({ children }) => {
             })
             console.log("getUserProfile : RESPONSE", response)
             if (response.ok) {
+                console.log("getUserProfile : response.ok : ")
                 const responseData = await response.json();
                 setUser(responseData.user_data);
                 setUserAddresses(responseData.user_addresses);
                 setUserPaymentMethods(responseData.user_payments);
-            } else {
+            }else if (response.status === 403) {
+                    const responseData = await response.json();
+                    alert(`${responseData.message}, You have to log in again`);
+                    logout();
+                } else {
                 console.error("Something went wrong, try again...");
             }
             return response.status;
@@ -200,29 +207,7 @@ export const UserProfileProvider = ({ children }) => {
             console.error("Error: ", error);
         }
     } 
-
-    // Get User orders
-    const getUserOrders = async () => {
-        try {
-            const response = await fetch(`${API_BASE_URL}users/orders`, {
-                method: "GET",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                }
-            })
-            if (response.ok) {
-                const responseData = await response.json();
-                console.log(responseData.user_orders)
-                return responseData.user_orders;
-            } else {
-                console.error("Something went wrong, try again...");
-            }
-        } catch (error) {
-            console.error("Error: ", error);
-        }
-    }
-
+    
     // Get User favorites
     const getUserFavorites = async () => {
         try {
@@ -244,6 +229,7 @@ export const UserProfileProvider = ({ children }) => {
             console.error("Error: ", error);
         }
     }
+
     // toggle Favorites
     const toggleFavorites = async (bookId) => {
         console.log("toggleFavorites : bookId : ", bookId)
@@ -276,8 +262,6 @@ export const UserProfileProvider = ({ children }) => {
         addPayment,
         updatePayment,
         deletePayment,
-
-        getUserOrders,
         getUserFavorites,
         toggleFavorites,
         isAuthenticated: token ? true : false

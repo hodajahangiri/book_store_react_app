@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 import { useCart } from "../../contexts/CartContext";
 import CartCard from "../../components/CartCard/CartCard";
+import { useNavigate } from "react-router-dom";
 
 function Cart({ loading, setLoading }) {
 
   const { cartItems, getUserCart , total } = useCart();
+  
+  const navigate = useNavigate();
 
   console.log("CART : TOTAL : ", total);
 
@@ -32,9 +35,9 @@ function Cart({ loading, setLoading }) {
       }
       {cartItems &&
         <div className='flex flex-col items-center w-full px-5! mt-9!'>
-          <div className='col-span-2 text-black font-bold mb-6!'>Total: ${total}</div>
+          <div className='col-span-2 text-black font-bold mb-6!'>Total: ${total.toFixed(2)}</div>
           <button className="w-full self-center bg-green-600 hover:bg-green-800 text-white font-extrabold py-2! px-4! rounded-xl cursor-pointer"
-          onClickCheckout>
+          onClick={() => navigate('/checkout')}>
             Checkout
           </button>
         </div>
