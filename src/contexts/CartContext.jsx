@@ -21,7 +21,6 @@ export const CartProvider = ({ children }) => {
     const [total, setTotal] = useState(0);
     const [cartItems, setCartItems] = useState([]);
     const [orders, setOrders] = useState([]);
-    const [isCartUpdated, setIsCartUpdated] = useState(false);
 
     useEffect(() => {
         console.log("USEEFFECT : CART_ITEMS", cartItems)
@@ -52,6 +51,7 @@ export const CartProvider = ({ children }) => {
                         setCartItems(responseData.cart_books);
                         return responseData.cart_info.id //return the id of the cart
                     } else {
+                        setCartItems([]);
                         console.log("getUserCart : responseData.message", responseData.message)
                         // alert("getUserCart : responseData.message", responseData.message)
                         return responseData.message;
@@ -138,8 +138,14 @@ export const CartProvider = ({ children }) => {
                 console.log("getUserOrders : response.ok")
                 const responseData = await response.json();
                 console.log("getUserOrders : responseData : ", responseData)
-                console.log(responseData.user_orders)
-                setOrders(responseData.user_orders)
+                if(responseData.user_orders){
+                    console.log(responseData.user_orders)
+                    console.log("SSSSEEETTTT OOOOORRRRDDDEEEERRRRSSSSS")
+                    setOrders(responseData.user_orders)
+                    console.log("SSSSEEETTTT OOOOORRRRDDDEEEERRRRSSSSS DDDOOONNNNEEEEE")
+                }else{
+                    setOrders([]);
+                }
                 return responseData.user_orders;
             } else if (response.status === 403) {
                 const responseData = await response.json();
