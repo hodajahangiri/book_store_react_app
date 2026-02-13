@@ -1,8 +1,21 @@
-import React from 'react'
+import notFoundPic from '../../assets/NotFoundPic.jpg'
 
 function NotFound() {
   return (
-    <div>NotFound</div>
+    <div className='flex flex-col items-center w-full'>
+      <div className="relative flex flex-col justify-center my-15! mx-5!  md:w-3/4 min-h-100 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-3!">
+        <div className='grid grid-cols-1 md:grid-cols-2 place-items-center pt-3!'>
+          <img src={notFoundPic} alt='bookStorePic'
+            className='border-4 border-gray-500 w-60 h-60 rounded-2xl self-center'
+          />
+          <div className='px-3! py-3! text-center'>
+            <p className='text-gray-500 font-bold text-6xl'>OOPS!!!</p>
+            <p className='text-gray-400 font-bold text-xl'>PAGE NOT FOUND</p>
+            <p className='text-gray-500 font-bold text-9xl'>404</p>
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 
