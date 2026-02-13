@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import SubmitButton from "../SubmitButton/SubmitButton";
 
 function UserForm({ submitFunction, isRegisterForm }) {
@@ -22,7 +23,7 @@ function UserForm({ submitFunction, isRegisterForm }) {
     });
 
     useEffect(() => {
-        console.log("isRegisterForm",isRegisterForm)
+        console.log("isRegisterForm", isRegisterForm)
         console.log("user", user)
         if (!isRegisterForm && user) {
             setFormData(prev => ({ ...prev, ...user }));
@@ -47,7 +48,7 @@ function UserForm({ submitFunction, isRegisterForm }) {
     const handleChange = event => {
         const { id, value } = event.target;
         setFormData(prevData => ({ ...prevData, [id]: value }));
-        if (id === 'email' || id === 'phone'){
+        if (id === 'email' || id === 'phone') {
             // real time validation of fields
             const error = validateFormFields(id, value);
             setFieldsError(prev => ({ ...prev, [id]: error }));
@@ -58,7 +59,7 @@ function UserForm({ submitFunction, isRegisterForm }) {
         event.preventDefault();
         const response = await submitFunction(formData);
         console.log("UserForm : handleSubmit : response", response)
-        if(response === 201 || response === 200){
+        if (response === 201 || response === 200) {
             navigate('/profile');
         }
     }
@@ -67,6 +68,8 @@ function UserForm({ submitFunction, isRegisterForm }) {
         <div className="my-20! flex flex-col wrap-normal items-center gap-7">
             <form className="flex flex-col w-full md:w-1/2 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8! mx-30!"
                 onSubmit={handleSubmit}>
+                <p className='text-black font-bold'>{isRegisterForm ? "Register" : "Update Profile"}</p>
+                <hr className="h-px my-3! text-gray-500 border w-9/10 col-span-2" />
                 <div className="w-9/10 p-5!">
                     <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="first_name">
                         First Name
@@ -133,6 +136,24 @@ function UserForm({ submitFunction, isRegisterForm }) {
                         onChange={handleChange}
                         value={formData.phone} />
                     {fieldsError.phone && <p className="text-red-800"> {fieldsError.phone}</p>}
+                </div>
+                <div className="flex items-start gap-2! w-9/10 p-5!">
+                    <input className="w-5 h-5 rounded border border-gray-300 bg-gray-50 focus:ring-3 focus:ring-blue-300 text-blue-600"
+                        name="checkbox"
+                        id="checkbox"
+                        type="checkbox"
+                        placeholder="+1(###) ###-####"
+                        required />
+                    {fieldsError.phone && <p className="text-red-800"> {fieldsError.phone}</p>}
+                    <label className="block text-gray-700 text-xs md:text-sm font-bold mb-2!" htmlFor="phone">
+                        By checking this box, I confirm that I have read, understood, and agree to be bound by
+                        <Link className="text-blue-600 hover:underline" to={'/terms'}
+                            target="_blank" rel="noopener noreferrer"> the Terms and Conditions </Link>
+                        and
+                        <Link className="text-blue-600 hover:underline" to={'/privacy'}
+                            target="_blank" rel="noopener noreferrer"> Privacy Policy </Link>
+                        .
+                    </label>
                 </div>
                 <div className="w-9/10 p-5!">
                     <SubmitButton textButton={isRegisterForm ? "Register" : "Update"} />
