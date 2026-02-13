@@ -1,7 +1,7 @@
 import LayoutPhoto from '../../components/LayoutPhoto/LayoutPhoto';
-import aboutPic from '../../assets/bookStore_1.jpg'
-import storyPic from '../../assets/bookStore_2.jpg'
-import missionPic from '../../assets/bookStore_3.jpg'
+import aboutPic from '../../assets/bookStore_1.jpg';
+import storyPic from '../../assets/bookStore_2.jpg';
+import missionPic from '../../assets/bookStore_3.jpg';
 
 function About() {
   return (

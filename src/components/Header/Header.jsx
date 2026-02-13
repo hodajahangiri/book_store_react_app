@@ -30,13 +30,13 @@ function Header() {
 
     const { isDarkMode, toggleTheme } = useTheme();
     const { isAuthenticated, logout } = useAuth();
-    const {getUserCart , cartItems} = useCart();
+    const { getUserCart, cartItems } = useCart();
 
     const [anchorElNav, setAnchorElNav] = useState(null);
     const [anchorElUser, setAnchorElUser] = useState(null);
 
     useEffect(() => {
-            getUserCart();
+        getUserCart();
     }, [isAuthenticated])
 
     const handleOpenNavMenu = (event) => {
@@ -126,7 +126,7 @@ function Header() {
                             </MenuItem>
                         </Menu>
                     </Box>
-                    
+
                     <Typography
                         variant="h5"
                         noWrap
@@ -143,7 +143,7 @@ function Header() {
                         }}
                         onClick={() => navigate('/')}
                     >
-                       <MenuBookIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                        <MenuBookIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -210,25 +210,25 @@ function Header() {
                                     navigate('/profile');
                                     setAnchorElUser(null);
                                 }}>
-                                    <Typography sx={{ textAlign: 'center' }}>Profile</Typography>
+                                    <Typography sx={{ textAlign: 'center' }}>My Profile</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     navigate('/user/favorites');
                                     setAnchorElUser(null);
                                 }}>
-                                    <Typography sx={{ textAlign: 'center' }}>Favorites</Typography>
+                                    <Typography sx={{ textAlign: 'center' }}>My Favorites</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     navigate('/cart');
                                     setAnchorElUser(null);
                                 }}>
-                                    <Typography sx={{ textAlign: 'center' }}>Cart</Typography>
+                                    <Typography sx={{ textAlign: 'center' }}>My Cart</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     navigate('/orders');
                                     setAnchorElUser(null);
                                 }}>
-                                    <Typography sx={{ textAlign: 'center' }}>Orders</Typography>
+                                    <Typography sx={{ textAlign: 'center' }}>My Orders</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     logout();

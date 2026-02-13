@@ -23,7 +23,14 @@ function Cart({ loading, setLoading }) {
 
   if (loading) return <div>Loading...</div>
   return (
-    <div className="mt-25! mb-25!">
+    <div className="mt-15! mb-25! flex flex-col items-center">
+      {
+        cartItems.length > 0 &&
+        <>
+          <p className='text-black font-bold'>My Cart</p>
+          <hr className="h-px mb-10! mt-4! text-gray-500 border w-9/10 col-span-2" />
+        </>
+      }
       {cartItems.length > 0 ?
         cartItems.map((cartBook, idx) => (
           <CartCard key={cartBook.book.id} cartBook={cartBook} idx={idx + 1} />
