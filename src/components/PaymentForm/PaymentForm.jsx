@@ -85,6 +85,8 @@ function PaymentForm({ submitFunction, payment, isAddForm }) {
         <div className="my-20! flex flex-col wrap-normal items-center gap-7">
             <form className="flex flex-col w-full md:w-1/2 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8! mx-30!"
                 onSubmit={handleSubmit}>
+                    <p className='text-black font-bold'>{isAddForm ? "Add Card" : "Update Card"}</p>
+                <hr className="h-px my-3! text-gray-500 border w-9/10 col-span-2" />
                 <div className="w-9/10 p-5!">
                     <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="card_number">
                         Card Number

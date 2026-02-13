@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SubmitButton from "../SubmitButton/SubmitButton";
 
-function AddressForm({submitFunction, address , isAddForm}) {
+function AddressForm({ submitFunction, address, isAddForm }) {
 
     console.log("AddressForm : submitFunction: ", submitFunction)
     console.log("AddressForm : address: ", address)
@@ -38,9 +38,9 @@ function AddressForm({submitFunction, address , isAddForm}) {
         setFormData(prevData => ({ ...prevData, [id]: value }));
         if (id === 'number') {
             let inputValue = parseInt(value, 10);
-            if(!isNaN(inputValue)) {
+            if (!isNaN(inputValue)) {
                 setFormData(prevData => ({ ...prevData, [id]: inputValue }));
-            }else{
+            } else {
                 setFormData(prevData => ({ ...prevData, [id]: null }));
             }
             // real time validation of fields
@@ -51,10 +51,10 @@ function AddressForm({submitFunction, address , isAddForm}) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        if(isAddForm){
+        if (isAddForm) {
             const response = await submitFunction(formData);
             console.log(response)
-        }else{
+        } else {
             const response = await submitFunction(address.id, formData);
             console.log(response)
         }
@@ -65,6 +65,8 @@ function AddressForm({submitFunction, address , isAddForm}) {
         <div className="my-20! flex flex-col wrap-normal items-center gap-7">
             <form className="flex flex-col w-full md:w-1/2 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8! mx-30!"
                 onSubmit={handleSubmit}>
+                <p className='text-black font-bold'>{isAddForm ? "Add Address" : "Update Address"}</p>
+                <hr className="h-px my-3! text-gray-500 border w-9/10 col-span-2" />
                 <div className="w-9/10 p-5!">
                     <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="line1">
                         Line 1
@@ -115,7 +117,7 @@ function AddressForm({submitFunction, address , isAddForm}) {
                         required
                         onChange={handleChange}
                         value={formData.city} />
-                    
+
                 </div>
                 <div className="w-9/10 p-5!">
                     <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="state">

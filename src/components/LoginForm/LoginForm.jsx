@@ -5,7 +5,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 function LoginForm() {
 
-     const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [credentialData, setCredentialData] = useState({
         email: "",
@@ -18,13 +18,13 @@ function LoginForm() {
 
     const validateEmailField = (value) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return (emailRegex.test(value)) ? "" : "Enter correct email"; 
+        return (emailRegex.test(value)) ? "" : "Enter correct email";
     }
 
     const handleChange = event => {
         const { id, value } = event.target;
         setCredentialData(prevData => ({ ...prevData, [id]: value }));
-        if (id === 'email'){
+        if (id === 'email') {
             // real time validation of email
             const error = validateEmailField(value);
             setEmailError(error);
@@ -34,11 +34,11 @@ function LoginForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         // Check for not sending empty object
-        if(credentialData.email === "" || credentialData.password === ""){
+        if (credentialData.email === "" || credentialData.password === "") {
             alert("Please Fill Out All fields...")
-        }else{
+        } else {
             const response = await login(credentialData);
-            if(response === 200){
+            if (response === 200) {
                 navigate('/');
             }
         };
@@ -47,7 +47,9 @@ function LoginForm() {
     return (
         <div className="my-20! flex flex-col wrap-normal items-center gap-7">
             <form className="flex flex-col w-full md:w-1/2 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8! mx-30!"
-            onSubmit={handleSubmit}>
+                onSubmit={handleSubmit}>
+                <p className='text-black font-bold'>Login</p>
+                <hr className="h-px my-3! text-gray-500 border w-9/10 col-span-2" />
                 <div className="w-9/10 p-5!">
                     <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="email">
                         Email
@@ -56,11 +58,11 @@ function LoginForm() {
                         name="email"
                         id="email"
                         type="text"
-                        placeholder="Email" 
+                        placeholder="Email"
                         required
                         onChange={handleChange}
-                        value={credentialData.email}/>
-                        {emailError && <p className="text-red-800"> {emailError}</p>}
+                        value={credentialData.email} />
+                    {emailError && <p className="text-red-800"> {emailError}</p>}
                 </div>
                 <div className="w-9/10 p-5!">
                     <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="password">
@@ -70,13 +72,13 @@ function LoginForm() {
                         name="password"
                         id="password"
                         type="password"
-                        placeholder="Password" 
+                        placeholder="Password"
                         required
                         onChange={handleChange}
-                        value={credentialData.password}/>
+                        value={credentialData.password} />
                 </div>
                 <div className="w-9/10 p-5!">
-                    <SubmitButton textButton="Login"/>
+                    <SubmitButton textButton="Login" />
                 </div>
                 <div className="w-9/10 p-5!">
                     <p className="text-black">Don't have an account? <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 cursor-pointer" to='/register'>Sign up here!</Link></p>
