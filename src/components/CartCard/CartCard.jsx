@@ -29,7 +29,7 @@ function CartCard({ cartBook, idx }) {
                     </div>
                 </div>
             </div>
-        </div >
+        </div>
     )
 }
 

@@ -42,7 +42,7 @@ function App() {
           <Route path="/book/details" element={<BookDetails />} />
           <Route path="/cart" element={<Cart loading={loading} setLoading={setLoading}/>} />
           <Route path="/checkout" element={<Checkout loading={loading} setLoading={setLoading}/>}/>
-          <Route path="/orders" element={<Orders />} />
+          <Route path="/orders" element={<Orders loading={loading} setLoading={setLoading}/>} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />

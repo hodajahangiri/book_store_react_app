@@ -121,9 +121,10 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-
     // Get User orders
     const getUserOrders = async () => {
+        console.log("getUserOrders : FUNCTION CALL")
+        console.log("getUserOrders : token" , token)
         try {
             const response = await fetch(`${API_BASE_URL}users/orders`, {
                 method: "GET",
@@ -132,11 +133,18 @@ export const CartProvider = ({ children }) => {
                     'Authorization': 'Bearer ' + token
                 }
             })
+            console.log("getUserOrders : response : ", response)
             if (response.ok) {
+                console.log("getUserOrders : response.ok")
                 const responseData = await response.json();
+                console.log("getUserOrders : responseData : ", responseData)
                 console.log(responseData.user_orders)
                 setOrders(responseData.user_orders)
                 return responseData.user_orders;
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                alert(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
                 console.error("Something went wrong, try again...");
             }
@@ -168,7 +176,7 @@ export const CartProvider = ({ children }) => {
                 alert(responseData);
                 setCartItems([]);
                 // setIsCartUpdated(prev => !prev);
-                // getUserOrders();
+                getUserOrders();
                 return response.status;
             } else if (response.status === 403) {
                 const responseData = await response.json();
