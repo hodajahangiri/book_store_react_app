@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 function ContactForm() {
 
@@ -19,8 +20,7 @@ function ContactForm() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Check for not sending empty object
-        alert("We will be in touch soon 😊 ");
+        toast.success("We will be in touch soon 😊 ");
         navigate('/')
     };
 

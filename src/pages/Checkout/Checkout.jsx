@@ -38,14 +38,14 @@ function Checkout({ loading, setLoading }) {
           <span>
             There is no Address for you, Add Address to your profile first
           </span>
-          <span className="text-blue-500 cursor-pointer" onClick={() => navigate('/profile')}>Click Here</span>
+          <span className="text-blue-500 cursor-pointer" onClick={() => navigate('/profile')}> Click Here</span>
         </div>
       ) : userPaymentMethods?.length === 0 ? (
         <div>
           <span>
             There is no Payment Method for you, Add a Payment Method to your profile first
           </span>
-          <span className="text-blue-500 cursor-pointer" onClick={() => navigate('/profile')}>Click Here</span>
+          <span className="text-blue-500 cursor-pointer" onClick={() => navigate('/profile')}> Click Here</span>
         </div>
       ) : (
         <OrderForm cartId={cartId} userAddresses={userAddresses} userPaymentMethods={userPaymentMethods} />
