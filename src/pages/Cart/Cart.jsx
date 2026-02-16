@@ -5,19 +5,16 @@ import { useNavigate } from "react-router-dom";
 
 function Cart({ loading, setLoading }) {
 
-  const { cartItems, getUserCart , total } = useCart();
-  
+  const { cartItems, getUserCart, total } = useCart();
   const navigate = useNavigate();
-
-  console.log("CART : TOTAL : ", total);
 
   useEffect(() => {
     setLoading(true);
     const getCartBooks = async () => {
-      const response = await getUserCart();
+      await getUserCart();
       setLoading(false)
     }
-    getCartBooks()
+    getCartBooks();
   }, [])
 
 
@@ -45,7 +42,7 @@ function Cart({ loading, setLoading }) {
         <div className='flex flex-col items-center w-full px-5! mt-9!'>
           <div className='col-span-2 text-black font-bold mb-6!'>Total: ${total.toFixed(2)}</div>
           <button className="w-full self-center bg-green-600 hover:bg-green-800 text-white font-extrabold py-2! px-4! rounded-xl cursor-pointer"
-          onClick={() => navigate('/checkout')}>
+            onClick={() => navigate('/checkout')}>
             Checkout
           </button>
         </div>

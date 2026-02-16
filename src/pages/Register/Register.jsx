@@ -3,10 +3,10 @@ import { useAuth } from "../../contexts/AuthContext";
 
 function Register() {
 
-  const {register} = useAuth();
+  const { register } = useAuth();
 
   return (
-    <UserForm submitFunction={register} isRegisterForm={true}/>
+    <UserForm submitFunction={register} isRegisterForm={true} />
   )
 }
 

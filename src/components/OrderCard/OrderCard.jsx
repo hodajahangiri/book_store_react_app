@@ -3,8 +3,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 function OrderCard({ order }) {
 
-    console.log("OrderCard : COMPONENT : ", order)
-
     const { deleteOrder } = useCart();
 
     return (
@@ -14,9 +12,8 @@ function OrderCard({ order }) {
                     <div className='col-span-3 flex flex-row gap-1'>
                         {order.order_books &&
                             order.order_books.map((bookData) => (
-                                <div className="flex flex-col gap-1 items-center">
+                                <div key={bookData?.book?.id} className="flex flex-col gap-1 items-center">
                                     <img
-                                        key={bookData?.book?.id}
                                         className="w-10 h-10 rounded object-center border-2"
                                         src={bookData?.book?.image_link}
                                         alt={bookData?.book?.title}

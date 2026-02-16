@@ -1,12 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { API_BASE_URL} from '../config.jsx';
+import { API_BASE_URL } from '../config.jsx';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 //Step 1
 //Create the context
 const AuthContext = createContext();
-
-
 
 //Step 2
 //Create useAuth hook to consume this context
@@ -51,11 +50,11 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem("token", loginData.token);
                 localStorage.setItem("user", JSON.stringify(loginData.user_data)); //transforming the user into json readable string
             } else {
-                alert("Error: Invalid Email or Password")
+                toast.warning("Error: Invalid Email or Password");
             }
             return response.status;
         } catch (error) {
-            console.error("Error: ", error);
+            toast.error(`Error: ${error}`);
         }
     };
 
@@ -65,8 +64,6 @@ export const AuthProvider = ({ children }) => {
         setUser(null)
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        // setCartItems([]);
-        // setOrders([]);
         navigate('/');
     };
 
@@ -87,14 +84,13 @@ export const AuthProvider = ({ children }) => {
                 localStorage.setItem("token", responseData.token);
                 localStorage.setItem("user", JSON.stringify(responseData.user_data));
             } else if (response.status === 400) {
-                console.error(responseData.error);
-                alert('You already have an account with this email.');
+                toast.info(responseData.error);
             } else {
-                console.error('Something went wrong.');
+                console.warn("Something went wrong, try again...");
             }
             return response.status;
         } catch (error) {
-            console.error("Error: ", error);
+            toast.error(`Error: ${error}`);
         }
     };
 
@@ -110,13 +106,17 @@ export const AuthProvider = ({ children }) => {
             })
             const responseData = await response.json();
             if (response.ok) {
-                alert(responseData.message);
+                toast.success(responseData.message);
+                logout();
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                toast.info(`${responseData.message}, You have to log in again`);
                 logout();
             } else {
-                console.error(responseData.message);
+                console.warn(responseData.message);
             }
         } catch (error) {
-            console.error("Error: ", error);
+            toast.error(`Error: ${error}`);
         }
     };
 
@@ -133,15 +133,19 @@ export const AuthProvider = ({ children }) => {
             })
             if (response.ok) {
                 const responseData = await response.json();
-                alert(responseData.message);
+                toast.success(responseData.message);
                 setUser(responseData.user_data);
                 localStorage.setItem("user", JSON.stringify(responseData.user_data));
+            } else if (response.status === 403) {
+                const responseData = await response.json();
+                toast.info(`${responseData.message}, You have to log in again`);
+                logout();
             } else {
-                console.error("Something went wrong, try again...");
+                console.warn("Something went wrong, try again...");
             }
             return response.status;
         } catch (error) {
-            console.error("Error: ", error);
+            toast.error(`Error: ${error}`);
         }
     };
 

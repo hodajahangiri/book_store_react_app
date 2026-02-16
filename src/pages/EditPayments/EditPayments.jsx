@@ -5,15 +5,9 @@ import { useLocation } from "react-router-dom";
 function EditPayments() {
 
   const location = useLocation();
-
   const { payment, isAddForm } = location.state || {};
 
-  console.log("EditPayments: payment", payment)
-  console.log("EditPayments: isAddForm", isAddForm)
-
   const { updatePayment, addPayment } = useProfile()
-
-
 
   return (
     <>

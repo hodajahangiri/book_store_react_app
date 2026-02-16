@@ -10,7 +10,6 @@ function AddressCard({ addressList }) {
   const navigate = useNavigate();
 
   const handleEditClick = (address) => {
-    console.log(address);
     navigate('/user/addresses', {
       state: {
         address: address,

@@ -5,7 +5,7 @@ import { useCart } from '../../contexts/CartContext';
 import OrderCard from '../../components/OrderCard/OrderCard';
 
 
-function Orders({setLoading }) {
+function Orders({ setLoading }) {
 
   const { isAuthenticated } = useAuth();
   const { getUserOrders, orders } = useCart();

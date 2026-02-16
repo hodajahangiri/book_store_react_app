@@ -10,7 +10,6 @@ function PaymentCard({ paymentsList }) {
   const navigate = useNavigate();
 
   const handleEditClick = (payment) => {
-    console.log(payment);
     navigate('/user/payments', {
       state: {
         payment: payment,

@@ -3,11 +3,11 @@ import { useAuth } from "../../contexts/AuthContext";
 
 function UpdateProfile() {
 
-  const {updateProfile} = useAuth();
+  const { updateProfile } = useAuth();
 
   return (
     <>
-    <UserForm submitFunction={updateProfile} isRegisterForm={false}/>
+      <UserForm submitFunction={updateProfile} isRegisterForm={false} />
     </>
   )
 }

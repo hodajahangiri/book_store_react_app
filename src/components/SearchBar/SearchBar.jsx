@@ -1,7 +1,7 @@
 import SearchIcon from '@mui/icons-material/Search';
 import { useEffect, useState } from 'react';
 
-function SearchBar({fetchBooks }) {
+function SearchBar({ fetchBooks }) {
 
     const [searchInput, setSearchInput] = useState("");
 
@@ -16,7 +16,6 @@ function SearchBar({fetchBooks }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("handleSubmit : searchInput", searchInput);
         fetchBooks(searchInput);
     }
 

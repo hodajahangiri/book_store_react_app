@@ -20,6 +20,7 @@ import Terms from "./pages/Terms/Terms";
 import NotFound from "./pages/NotFound/NotFound";
 import { useTheme } from "./contexts/ThemeContext";
 import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 
 function App() {
 
@@ -31,18 +32,18 @@ function App() {
       <Header className="basis-1/3" />
       <div className="flex-1">
         <Routes>
-          <Route path="/" element={<Home loading={loading} setLoading={setLoading}/>} />
+          <Route path="/" element={<Home loading={loading} setLoading={setLoading} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/update" element={<UpdateProfile />} />
           <Route path="/user/addresses" element={<EditAddresses />} />
           <Route path="/user/payments" element={<EditPayments />} />
-          <Route path="/user/favorites" element={<Favorites loading={loading} setLoading={setLoading}/>} />
+          <Route path="/user/favorites" element={<Favorites loading={loading} setLoading={setLoading} />} />
           <Route path="/book/details" element={<BookDetails />} />
-          <Route path="/cart" element={<Cart loading={loading} setLoading={setLoading}/>} />
-          <Route path="/checkout" element={<Checkout loading={loading} setLoading={setLoading}/>}/>
-          <Route path="/orders" element={<Orders loading={loading} setLoading={setLoading}/>} />
+          <Route path="/cart" element={<Cart loading={loading} setLoading={setLoading} />} />
+          <Route path="/checkout" element={<Checkout loading={loading} setLoading={setLoading} />} />
+          <Route path="/orders" element={<Orders loading={loading} setLoading={setLoading} />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
@@ -51,6 +52,18 @@ function App() {
         </Routes>
       </div>
       <Footer className="basis-1/3" />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme={isDarkMode ? "dark" : "light"}
+      />
     </div>
   )
 }

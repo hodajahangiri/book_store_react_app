@@ -23,8 +23,6 @@ function UserForm({ submitFunction, isRegisterForm }) {
     });
 
     useEffect(() => {
-        console.log("isRegisterForm", isRegisterForm)
-        console.log("user", user)
         if (!isRegisterForm && user) {
             setFormData(prev => ({ ...prev, ...user }));
             setFormData(prev => ({ ...prev, ["password"]: "" }));
@@ -33,7 +31,6 @@ function UserForm({ submitFunction, isRegisterForm }) {
 
     const validateFormFields = (id, value) => {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        // const phoneRegex = /^\(?\d{3}\)?[-.\s]?\d{3}[-.\s]?\d{4}$/;
         const phoneRegex = /^(\+?1\s?)?\(?[2-9]\d{2}\)?[.\-\s]?[2-9]\d{2}[.\-\s]?\d{4}$/
         switch (id) {
             case "email":
@@ -58,8 +55,14 @@ function UserForm({ submitFunction, isRegisterForm }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const response = await submitFunction(formData);
-        console.log("UserForm : handleSubmit : response", response)
         if (response === 201 || response === 200) {
+            setFormData({
+                first_name: '',
+                last_name: '',
+                email: '',
+                password: '',
+                phone: ''
+            })
             navigate('/profile');
         }
     }
@@ -144,15 +147,13 @@ function UserForm({ submitFunction, isRegisterForm }) {
                         type="checkbox"
                         placeholder="+1(###) ###-####"
                         required />
-                    {fieldsError.phone && <p className="text-red-800"> {fieldsError.phone}</p>}
                     <label className="block text-gray-700 text-xs md:text-sm font-bold mb-2!" htmlFor="phone">
                         By checking this box, I confirm that I have read, understood, and agree to be bound by
                         <Link className="text-blue-600 hover:underline" to={'/terms'}
                             target="_blank" rel="noopener noreferrer"> the Terms and Conditions </Link>
                         and
                         <Link className="text-blue-600 hover:underline" to={'/privacy'}
-                            target="_blank" rel="noopener noreferrer"> Privacy Policy </Link>
-                        .
+                            target="_blank" rel="noopener noreferrer"> Privacy Policy. </Link>
                     </label>
                 </div>
                 <div className="w-9/10 p-5!">

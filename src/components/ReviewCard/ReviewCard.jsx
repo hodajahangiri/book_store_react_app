@@ -6,12 +6,10 @@ import Rating from '@mui/material/Rating';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-function ReviewCard({ review, bookId ,setExistedUserReview}) {
-    console.log("ReviewCard : REVIEW : ", review)
-    console.log("ReviewCard : BOOKID : ", bookId)
+function ReviewCard({ review, bookId, setExistedUserReview }) {
 
     const { user } = useAuth();
-    const { updateReview, deleteReview} = useProfile();
+    const { updateReview, deleteReview } = useProfile();
 
     const [isUserReview, setIsUserReview] = useState(false);
     const [isDisplayForm, setIsDisplayForm] = useState(false);
@@ -28,17 +26,13 @@ function ReviewCard({ review, bookId ,setExistedUserReview}) {
         }
     }, [])
 
-    console.log("ReviewCard : USER : ", review)
-    const handleEditClick = (review) => {
-        console.log("handleEditClick : REVIEW :", review);
+    const handleEditClick = () => {
         setIsDisplayForm(true);
     }
 
-    const handleDeleteClick = async (reviewId) => {
-        console.log("handleDeleteClick : REVIEW ID :", reviewId);
+    const handleDeleteClick = () => {
         // Delete user review
-        const responseStatus = await deleteReview(review.id, bookId);
-        console.log("ReviewCard : handleSubmit : RESPONSE DATA : ", responseStatus)
+        deleteReview(review.id, bookId);
         setFormData({
             rating: 5,
             comment: ""
@@ -49,15 +43,12 @@ function ReviewCard({ review, bookId ,setExistedUserReview}) {
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData(prev => ({ ...prev, [name]: value }));
-        console.log(`id : ${name} --- value : ${value}`)
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         // Update user review
-        console.log("ReviewCard : handleSubmit : REVIEW ID : ", review.id)
-        const responseStatus = updateReview(review.id, formData, bookId);
-        console.log("ReviewCard : handleSubmit : RESPONSE DATA : ", responseStatus)
+        updateReview(review.id, formData, bookId);
         setFormData({
             rating: 5,
             comment: ""
@@ -69,12 +60,11 @@ function ReviewCard({ review, bookId ,setExistedUserReview}) {
         <div>
             <div className="flex flex-col gap-2 px-5!">
                 <div className="flex justify-between">
-                    <span>{review?.user.first_name} {review?.user.last_name}</span>
+                    <span className="text-black text-sm">{review?.user.first_name} {review?.user.last_name} :</span>
                     <Rating name="half-rating-reade" value={review?.rating} precision={0.5} readOnly />
                 </div>
-                <hr className="h-px my-1! text-gray-500 border col-span-2" />
                 <div className="flex justify-between">
-                    <span>{review?.comment}</span>
+                    <span className="text-black text-lg font-bold">{review?.comment}</span>
                     {
                         isUserReview &&
                         <div className="flex flex-row gap-4 mr-4!">
@@ -83,7 +73,7 @@ function ReviewCard({ review, bookId ,setExistedUserReview}) {
                         </div>
                     }
                 </div>
-                <hr className="h-px mb-5! bg-neutral-quaternary border-2" />
+                <hr className="mb-5! bg-neutral-quaternary border-2 text-black" />
                 <div></div>
             </div>
 

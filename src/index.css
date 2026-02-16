@@ -1,16 +1,21 @@
 @import "tailwindcss";
 
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.darkMode{
-    background-color: rgb(67, 67, 67);
-    color : White;
+.darkMode {
+  background-color: rgb(67, 67, 67);
+  color: White;
 }
 
-.lightMode{
-    background-color: white;
-    color : black;
+.lightMode {
+  background-color: white;
+  color: black;
+}
+
+:root {
+  --toastify-toast-width: 420px;
+  --toastify-toast-offset: 65px;
 }

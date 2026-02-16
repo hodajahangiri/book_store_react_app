@@ -3,11 +3,11 @@ import { useProfile } from "../../contexts/UserProfileContext";
 
 function UserAddresses() {
 
-  const { userAddresses } = useProfile(); 
+  const { userAddresses } = useProfile();
 
   return (
     <div className="mt-10! flex flex-col wrap-normal items-center gap-7">
-      <AddressCard addressList={userAddresses}/>
+      <AddressCard addressList={userAddresses} />
     </div>
   )
 }

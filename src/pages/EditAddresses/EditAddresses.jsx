@@ -6,10 +6,7 @@ function EditAddresses() {
     const location = useLocation();
     const { address, isAddForm } = location.state || {};
 
-    console.log("EditAddresses: address" , address)
-    console.log("EditAddresses: isAddForm" , isAddForm)
-
-    const { updateAddress , addAddress } = useProfile()
+    const { updateAddress, addAddress } = useProfile()
 
     return (
         <>

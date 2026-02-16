@@ -8,19 +8,15 @@ function OrderForm({ cartId, userAddresses, userPaymentMethods }) {
 
     const { cartItems, total, createOrder } = useCart();
 
-    console.log("ORDER FORM : CART ID : ", cartId)
-    console.log("ORDER FORM : userAddresses : ", userAddresses)
     const navigate = useNavigate();
 
     const [orderTotalCost, setOrderTotalCost] = useState(0);
-
     const [formData, setFormData] = useState({
         total: 0,
         subtotal: 0,
-        tax: 10,
+        tax: 0,
         shipping_cost: parseFloat((Math.random() * 3 + 10).toFixed(2))//generate a random float between 10 to 15
     });
-
     const [params, setParams] = useState({
         cartId: 0,
         addressId: 0,
@@ -28,19 +24,22 @@ function OrderForm({ cartId, userAddresses, userPaymentMethods }) {
     });
 
     useEffect(() => {
-        setParams(prev => ({...prev ,
-            cartId : cartId,
+        setParams(prev => ({
+            ...prev,
+            cartId: cartId,
             addressId: userAddresses[0].id,
             paymentId: userPaymentMethods[0].id
         }));
-    },[cartId])
+    }, [cartId])
 
     useEffect(() => {
         const newOrderTotal = (total + total * 0.1);
+        const newTaxPrice = (total * 0.1)
         setOrderTotalCost(newOrderTotal);
         setFormData(prev => ({
             ...prev,
             total: newOrderTotal,
+            tax: newTaxPrice,
             subtotal: total
         }));
     }, [total]);
@@ -48,8 +47,6 @@ function OrderForm({ cartId, userAddresses, userPaymentMethods }) {
 
     const handleChange = (event) => {
         const { id, value } = event.target;
-        console.log("HANDLECHANGE : VALUE", value)
-        console.log("HANDLECHANGE : ID", id)
         setParams(prev => ({
             ...prev,
             [id]: value,
@@ -58,19 +55,8 @@ function OrderForm({ cartId, userAddresses, userPaymentMethods }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log("ORDER FORM : HANDLESUBMIT : PARAMS : ", params)
-        console.log("ORDER FORM : HANDLESUBMIT : PARAMS TYPE: CART ID",typeof params.cartId)
-        console.log("ORDER FORM : HANDLESUBMIT : PARAMS TYPE: ADDRESS", typeof params.addressId)
-        console.log("ORDER FORM : HANDLESUBMIT : PARAMS TYPE: PAYMENT", typeof params.paymentId)
-        console.log("ORDER FORM : HANDLESUBMIT : FORMDATA : ", formData)
-        console.log("ORDER FORM : HANDLESUBMIT : FORM TYPE: TITLE", typeof formData.total)
-        console.log("ORDER FORM : HANDLESUBMIT : FORM TYPE: SUBTOTAL", typeof formData.subtotal)
-        console.log("ORDER FORM : HANDLESUBMIT : FORM TYPE: TAX", typeof formData.tax)
-        console.log("ORDER FORM : HANDLESUBMIT : PARAMS TYPE: SHIPPING_COST", typeof formData.shipping_cost)
         const response_status = await createOrder(params, formData);
-        console.log(response_status)
-        console.log(typeof response_status)
-        if(response_status === 201){
+        if (response_status === 201) {
             navigate('/orders');
         }
     }
@@ -149,13 +135,13 @@ function OrderForm({ cartId, userAddresses, userPaymentMethods }) {
                 <div className="grid grid-cols-2 gap-2 w-full mx-4!">
                     <p className='text-sm text-blue-800 font-bold'>Subtotal: </p>
                     <p className='text-sm text-black font-bold'>$ {formData.subtotal.toFixed(2)}</p>
-                    <p className='text-sm text-blue-800 font-bold'>tax: </p>
-                    <p className='text-sm text-black font-bold'>{formData.tax}%</p>
+                    <p className='text-sm text-blue-800 font-bold'>tax (10%):</p>
+                    <p className='text-sm text-black font-bold'>$ {formData.tax.toFixed(2)}</p>
                     <p className='text-sm text-blue-800 font-bold'>shipping cost: </p>
-                    <p className='text-sm text-black font-bold'>${formData.shipping_cost.toFixed(2)}%</p>
+                    <p className='text-sm text-black font-bold'>$ {formData.shipping_cost.toFixed(2)}</p>
                     <hr className="h-px m-3! text-gray-500 border w-3/4 col-span-2" />
                     <p className='text-sm text-blue-800 font-bold'>total: </p>
-                    <p className='text-sm text-black font-bold'>${formData.total.toFixed(2)}</p>
+                    <p className='text-sm text-black font-bold'>$ {formData.total.toFixed(2)}</p>
                 </div>
                 <div className="w-3/4 self-center mt-10!">
                     <SubmitButton textButton={"Confirm Order"} />

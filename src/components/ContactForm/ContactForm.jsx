@@ -12,7 +12,6 @@ function ContactForm() {
         message: ""
     });
 
-
     const handleChange = event => {
         const { id, value } = event.target;
         setFormData(prevData => ({ ...prevData, [id]: value }));
@@ -29,30 +28,30 @@ function ContactForm() {
     return (
         <div className="flex flex-col wrap-normal w-full items-center gap-7">
             <form className="flex flex-col gap-6 w-full mx-1!" onSubmit={handleSubmit}>
-                    <input className="shadow appearance-none border rounded w-full p-2! text-gray-700 bg-white leading-tight"
-                        name="full_name"
-                        id="full_name"
-                        type="text"
-                        placeholder="Full Name"
-                        required
-                        onChange={handleChange}
-                        value={formData.full_name} />
-                    <input className="shadow appearance-none border rounded w-full p-2! text-gray-700 bg-white leading-tight"
-                        id="email"
-                        type="text"
-                        placeholder="Email"
-                        required
-                        onChange={handleChange}
-                        value={formData.full_name} />
-                    <input className="shadow appearance-none border rounded w-full p-2! text-gray-700 bg-white leading-tight"
-                        name="message"
-                        id="message"
-                        type="text"
-                        placeholder="Message"
-                        required
-                        onChange={handleChange}
-                        value={formData.full_name} />
-                    <SubmitButton textButton="Contact Us" />
+                <input className="shadow appearance-none border rounded w-full p-2! text-gray-700 bg-white leading-tight"
+                    name="full_name"
+                    id="full_name"
+                    type="text"
+                    placeholder="Full Name"
+                    required
+                    onChange={handleChange}
+                    value={formData.full_name} />
+                <input className="shadow appearance-none border rounded w-full p-2! text-gray-700 bg-white leading-tight"
+                    id="email"
+                    type="text"
+                    placeholder="Email"
+                    required
+                    onChange={handleChange}
+                    value={formData.full_name} />
+                <input className="shadow appearance-none border rounded w-full p-2! text-gray-700 bg-white leading-tight"
+                    name="message"
+                    id="message"
+                    type="text"
+                    placeholder="Message"
+                    required
+                    onChange={handleChange}
+                    value={formData.full_name} />
+                <SubmitButton textButton="Contact Us" />
             </form>
         </div>
     )

@@ -7,25 +7,20 @@ import Rating from '@mui/material/Rating';
 
 function BookDetailsCard({ book }) {
 
-    console.log("BookDetailsCard : BOOK ", book)
-
-    const {getUserFavorites , toggleFavorites} = useProfile();
+    const { getUserFavorites, toggleFavorites } = useProfile();
     const [isLiked, setIsLiked] = useState(false);
     const { addToCart } = useCart();
 
     useEffect(() => {
         // Check user liked this or not 
-        const isLiked = async(bookId) => {
+        const isLiked = async (bookId) => {
             const response = await getUserFavorites();
-            console.log("USEEFFECT :isLiked : RESPONSE : ", response)
-            if (response){
-                console.log("USEEFFECT : isLiked :  RESPONSE BOOKDESCRIPTIONS : ")
-                const existedBook = await response.find(item => item.book_description.id === bookId)
-                console.log("isLiked : existedBook", existedBook)
+            if (response) {
+                const existedBook = await response.find(item => item.book_description.id === bookId);
                 return existedBook ? setIsLiked(true) : setIsLiked(false)
             }
         }
-        isLiked(book.id)
+        isLiked(book.id);
     }, [])
 
     const handleLikeClick = () => {
@@ -36,11 +31,11 @@ function BookDetailsCard({ book }) {
     return (
         <div className='flex flex-col items-center w-full'>
             <div className="relative flex flex-col my-15! mx-5!  md:w-3/4 min-h-100 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-3!">
-                <div className="absolute end-3 top-2.5">{isLiked ? 
+                <div className="absolute end-3 top-2.5">{isLiked ?
                     <FavoriteIcon className="text-red-800 cursor-pointer" fontSize="large"
-                    onClick={handleLikeClick}/> 
+                        onClick={handleLikeClick} />
                     : <FavoriteBorderIcon className="cursor-pointer" fontSize="large"
-                    onClick={handleLikeClick}/>} </div>
+                        onClick={handleLikeClick} />} </div>
                 <div className='grid grid-cols-1 sm:grid-cols-2 items-start'>
                     <div className='flex flex-col items-start gap-2'>
                         <img className='w-40 h-60 rounded-xl border-2 border-black'
@@ -65,7 +60,7 @@ function BookDetailsCard({ book }) {
                             <p className='text-sm text-blue-800 font-bold'>Price:</p>
                             <p className='text-sm text-black font-bold'>${book?.price}</p>
                             <p className='text-sm text-blue-800 font-bold'>Rating:</p>
-                            <Rating name="half-rating-reade" value={((book?.averageRating * 5)/book?.ratingsCount)} precision={0.5} readOnly />
+                            <Rating name="half-rating-reade" value={((book?.averageRating * 5) / book?.ratingsCount)} precision={0.5} readOnly />
                         </div>
                         <button className="mt-9! mr-3! p-2! w-2/3 self-end text-white bg-blue-800 bg-brand hover:bg-blue-900 rounded-xl cursor-pointer"
                             onClick={() => addToCart(book.id)}>Add to card</button>

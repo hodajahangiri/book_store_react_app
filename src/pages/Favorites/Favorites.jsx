@@ -16,28 +16,28 @@ function Favorites({ loading, setLoading }) {
       const userFavorites = await getUserFavorites();
       if (userFavorites) {
         const booksData = userFavorites?.map((book) => {
-        const description = book.book_description || {};
-        return {
-          title: description.title,
-          subtitle: description.subtitle,
-          author: description.author,
-          publisher: description.publisher,
-          published_date: description.published_date,
-          description: description.description,
-          isbn: description.isbn,
-          image_link: description.image_link,
-          language: description.language,
-          averageRating: description.averageRating,
-          ratingsCount: description.ratingsCount,
-          page_count: description.page_count
-        };
-      }) || [];
+          const description = book.book_description || {};
+          return {
+            title: description.title,
+            subtitle: description.subtitle,
+            author: description.author,
+            publisher: description.publisher,
+            published_date: description.published_date,
+            description: description.description,
+            isbn: description.isbn,
+            image_link: description.image_link,
+            language: description.language,
+            averageRating: description.averageRating,
+            ratingsCount: description.ratingsCount,
+            page_count: description.page_count
+          };
+        }) || [];
         setFavoritesBooks(booksData)
       }
       setLoading(false);
     }
     getFavorites()
-  },[])
+  }, [])
 
   return (
     <>

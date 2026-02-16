@@ -22,7 +22,6 @@ function Checkout({ loading, setLoading }) {
     setIsProfile(true);
     const getCartId = async () => {
       const cartId = await getUserCart();
-      console.log("CHECKOUT : USEEFFECT : CARTID : ", cartId)
       setCartId(cartId)
       setLoading(false)
     }

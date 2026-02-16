@@ -4,10 +4,6 @@ import SubmitButton from "../SubmitButton/SubmitButton";
 
 function AddressForm({ submitFunction, address, isAddForm }) {
 
-    console.log("AddressForm : submitFunction: ", submitFunction)
-    console.log("AddressForm : address: ", address)
-    console.log("AddressForm : isAddForm: ", isAddForm)
-
     const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
@@ -49,14 +45,12 @@ function AddressForm({ submitFunction, address, isAddForm }) {
         }
     };
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         if (isAddForm) {
-            const response = await submitFunction(formData);
-            console.log(response)
+            submitFunction(formData);
         } else {
-            const response = await submitFunction(address.id, formData);
-            console.log(response)
+            submitFunction(address.id, formData);
         }
         navigate('/profile');
     };
@@ -159,7 +153,7 @@ function AddressForm({ submitFunction, address, isAddForm }) {
                         value={formData.zipcode} />
                 </div>
                 <div className="w-9/10 p-5!">
-                    <SubmitButton textButton={address ? "Update" : "Register"} />
+                    <SubmitButton textButton={address ? "Update" : "Add"} />
                 </div>
             </form>
         </div>
