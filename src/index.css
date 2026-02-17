@@ -3,6 +3,9 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: "Delius", cursive;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .darkMode {
@@ -19,3 +22,4 @@
   --toastify-toast-width: 420px;
   --toastify-toast-offset: 65px;
 }
+

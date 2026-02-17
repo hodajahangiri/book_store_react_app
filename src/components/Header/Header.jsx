@@ -70,6 +70,7 @@ function Header() {
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
                             fontWeight: 700,
+                            fontFamily: 'Delius, cursive',
                             letterSpacing: '.3rem',
                             color: 'inherit',
                             textDecoration: 'none',
@@ -110,19 +111,19 @@ function Header() {
                                 navigate('/');
                                 setAnchorElNav(null);
                             }}>
-                                <Typography sx={{ textAlign: 'center' }}>Home</Typography>
+                                <Typography sx={{ textAlign: 'center', fontFamily: 'Delius, cursive', }}>Home</Typography>
                             </MenuItem>
                             <MenuItem onClick={() => {
                                 navigate('/about');
                                 setAnchorElNav(null);
                             }}>
-                                <Typography sx={{ textAlign: 'center' }}>About</Typography>
+                                <Typography sx={{ textAlign: 'center', fontFamily: 'Delius, cursive', }}>About</Typography>
                             </MenuItem>
                             <MenuItem onClick={() => {
                                 navigate('/contact');
                                 setAnchorElNav(null);
                             }}>
-                                <Typography sx={{ textAlign: 'center' }}>Contact Us</Typography>
+                                <Typography sx={{ textAlign: 'center', fontFamily: 'Delius, cursive', }}>Contact Us</Typography>
                             </MenuItem>
                         </Menu>
                     </Box>
@@ -149,19 +150,19 @@ function Header() {
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                         <Button
                             onClick={() => navigate('/')}
-                            sx={{ my: 2, display: 'block', color: isDarkMode ? 'black' : 'white' }}
+                            sx={{ my: 2, display: 'block', fontFamily: 'Delius, cursive', color: isDarkMode ? 'black' : 'white' }}
                         >
                             Home
                         </Button>
                         <Button
                             onClick={() => navigate('/about')}
-                            sx={{ my: 2, display: 'block', color: isDarkMode ? 'black' : 'white' }}
+                            sx={{ my: 2, display: 'block', fontFamily: 'Delius, cursive', color: isDarkMode ? 'black' : 'white' }}
                         >
                             About
                         </Button>
                         <Button
                             onClick={() => navigate('/contact')}
-                            sx={{ my: 2, display: 'block', color: isDarkMode ? 'black' : 'white' }}
+                            sx={{ my: 2, display: 'block', fontFamily: 'Delius, cursive', color: isDarkMode ? 'black' : 'white' }}
                         >
                             Contact Us
                         </Button>
@@ -210,32 +211,32 @@ function Header() {
                                     navigate('/profile');
                                     setAnchorElUser(null);
                                 }}>
-                                    <Typography sx={{ textAlign: 'center' }}>My Profile</Typography>
+                                    <Typography sx={{ textAlign: 'center' ,fontFamily: 'Delius, cursive' }}>My Profile</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     navigate('/user/favorites');
                                     setAnchorElUser(null);
                                 }}>
-                                    <Typography sx={{ textAlign: 'center' }}>My Favorites</Typography>
+                                    <Typography sx={{ textAlign: 'center', fontFamily: 'Delius, cursive', }}>My Favorites</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     navigate('/cart');
                                     setAnchorElUser(null);
                                 }}>
-                                    <Typography sx={{ textAlign: 'center' }}>My Cart</Typography>
+                                    <Typography sx={{ textAlign: 'center', fontFamily: 'Delius, cursive', }}>My Cart</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     navigate('/orders');
                                     setAnchorElUser(null);
                                 }}>
-                                    <Typography sx={{ textAlign: 'center' }}>My Orders</Typography>
+                                    <Typography sx={{ textAlign: 'center', fontFamily: 'Delius, cursive', }}>My Orders</Typography>
                                 </MenuItem>
                                 <MenuItem onClick={() => {
                                     logout();
                                     setAnchorElUser(null);
                                     navigate('/');
                                 }}>
-                                    <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
+                                    <Typography sx={{ textAlign: 'center', fontFamily: 'Delius, cursive', }}>Logout</Typography>
                                 </MenuItem>
                             </Menu>
                         </Box>
