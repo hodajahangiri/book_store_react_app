@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 function BookCard({ book }) {
 
@@ -8,7 +9,7 @@ function BookCard({ book }) {
 
     const readMoreClick = () => {
         if (!isAuthenticated){
-            alert("For seeing the book details to have to login first.")
+            toast.info("For seeing the book details to have to login first.")
         }else{
             navigate('/book/details', { state: {
                 book: book
