@@ -29,7 +29,7 @@ function SearchBar({ fetchBooks }) {
                 <div className="absolute inset-y-0 start-0 flex items-center ps-3! pointer-events-none">
                     <SearchIcon className="w-4 h-4 text-body text-black" />
                 </div>
-                <input className="block shadow appearance-none border-2 rounded-xl w-full p-3! ps-9! text-gray-700 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 leading-tight focus:ring-brand focus:border-brand shadow-xs placeholder:text-body"
+                <input className="block appearance-none rounded-xl w-full p-3! ps-9! text-gray-700 border-3 border-[#ffb703]  bg-[#f8f6f0] shadow shadow-[#dad7cd] leading-tight focus:ring-brand focus:border-brand placeholder:text-body"
                     name="email"
                     id="email"
                     type="text"

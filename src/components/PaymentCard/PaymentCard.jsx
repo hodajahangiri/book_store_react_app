@@ -21,7 +21,7 @@ function PaymentCard({ paymentsList }) {
   return (
     <>
       <p className="font-bold">Payment Methods</p>
-      <div className="flex flex-col gap-5 w-full md:w-3/4 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8!">
+      <div className="flex flex-col gap-5 w-full md:w-3/4 border-3 border-[#ffb703]  bg-[#f8f6f0] shadow-2xl shadow-[#dad7cd] rounded-2xl p-8!">
         {paymentsList.length > 0 ?
           paymentsList.map((payment) => (
             <div key={payment?.id} id={payment?.id} className="flex flex-row justify-between shadow border rounded-md w-full p-2! text-black bg-white">
@@ -30,8 +30,8 @@ function PaymentCard({ paymentsList }) {
                 <div>{`exp: ${payment?.expiry_month}/ ${payment?.expiry_year}`}</div>
               </div>
               <div className="flex flex-row gap-4 mr-4!">
-                <EditIcon value={payment} className='text-blue-700 cursor-pointer' onClick={() => handleEditClick(payment)} />
-                <DeleteIcon className='text-red-800 cursor-pointer' onClick={() => deletePayment(payment?.id)} />
+                <EditIcon value={payment} className='text-[#3a5a40] cursor-pointer' onClick={() => handleEditClick(payment)} />
+                <DeleteIcon className='text-[#ae2012] cursor-pointer' onClick={() => deletePayment(payment?.id)} />
               </div>
             </div>
           ))

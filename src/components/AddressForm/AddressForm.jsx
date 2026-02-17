@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SubmitButton from "../SubmitButton/SubmitButton";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 function AddressForm({ submitFunction, address, isAddForm }) {
 
@@ -57,105 +58,110 @@ function AddressForm({ submitFunction, address, isAddForm }) {
 
     return (
         <div className="my-20! flex flex-col wrap-normal items-center gap-7">
-            <form className="flex flex-col w-full md:w-1/2 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8! mx-30!"
-                onSubmit={handleSubmit}>
-                <p className='text-black font-bold'>{isAddForm ? "Add Address" : "Update Address"}</p>
-                <hr className="h-px my-3! text-gray-500 border w-9/10 col-span-2" />
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="line1">
-                        Line 1
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="line1"
-                        id="line1"
-                        type="text"
-                        placeholder="Line 1"
-                        required
-                        onChange={handleChange}
-                        value={formData.line1} />
-                </div>
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="line2">
-                        Line 2
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="line2"
-                        id="line2"
-                        type="text"
-                        placeholder="Line 2"
-                        onChange={handleChange}
-                        value={formData.line2} />
-                </div>
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="number">
-                        Apt Number
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="number"
-                        id="number"
-                        type="number"
-                        placeholder="Number"
-                        onChange={handleChange}
-                        value={formData.number} />
-                </div>
-                {numberError && <p className="text-red-800"> {numberError}</p>}
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="city">
-                        City
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="city"
-                        id="city"
-                        type="text"
-                        placeholder="City"
-                        required
-                        onChange={handleChange}
-                        value={formData.city} />
+            <div className="flex flex-col w-full md:w-1/2 border-3 border-[#ffb703]  bg-[#f8f6f0] shadow-2xl shadow-[#dad7cd] rounded-2xl p-8! mx-30!">
+                <form className="flex flex-col w-full "
+                    onSubmit={handleSubmit}>
+                    <p className='text-black font-bold'>{isAddForm ? "Add Address" : "Update Address"}</p>
+                    <hr className="h-px my-3! text-gray-500 border w-9/10 col-span-2" />
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="line1">
+                            Line 1
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="line1"
+                            id="line1"
+                            type="text"
+                            placeholder="Line 1"
+                            required
+                            onChange={handleChange}
+                            value={formData.line1} />
+                    </div>
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="line2">
+                            Line 2
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="line2"
+                            id="line2"
+                            type="text"
+                            placeholder="Line 2"
+                            onChange={handleChange}
+                            value={formData.line2} />
+                    </div>
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="number">
+                            Apt Number
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="number"
+                            id="number"
+                            type="number"
+                            placeholder="Number"
+                            onChange={handleChange}
+                            value={formData.number} />
+                    </div>
+                    {numberError && <p className="text-red-800"> {numberError}</p>}
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="city">
+                            City
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="city"
+                            id="city"
+                            type="text"
+                            placeholder="City"
+                            required
+                            onChange={handleChange}
+                            value={formData.city} />
 
+                    </div>
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="state">
+                            State
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700  bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="state"
+                            id="state"
+                            type="text"
+                            placeholder="State"
+                            required
+                            onChange={handleChange}
+                            value={formData.state} />
+                    </div>
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="country">
+                            Country
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="country"
+                            id="country"
+                            type="text"
+                            placeholder="Country"
+                            required
+                            onChange={handleChange}
+                            value={formData.country} />
+                    </div>
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="zipcode">
+                            Zipcode
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="zipcode"
+                            id="zipcode"
+                            type="text"
+                            placeholder="Zipcode"
+                            required
+                            onChange={handleChange}
+                            value={formData.zipcode} />
+                    </div>
+                    <div className="w-9/10 p-5!">
+                        <SubmitButton textButton={address ? "Update" : "Add"} />
+                    </div>
+                </form>
+                <div className="w-9/10 pb-5!">
+                    <DeleteButton textButton={"Cancel"} handleClick={() => { navigate('/profile') }} />
                 </div>
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="state">
-                        State
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700  bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="state"
-                        id="state"
-                        type="text"
-                        placeholder="State"
-                        required
-                        onChange={handleChange}
-                        value={formData.state} />
-                </div>
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="country">
-                        Country
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="country"
-                        id="country"
-                        type="text"
-                        placeholder="Country"
-                        required
-                        onChange={handleChange}
-                        value={formData.country} />
-                </div>
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="zipcode">
-                        Zipcode
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="zipcode"
-                        id="zipcode"
-                        type="text"
-                        placeholder="Zipcode"
-                        required
-                        onChange={handleChange}
-                        value={formData.zipcode} />
-                </div>
-                <div className="w-9/10 p-5!">
-                    <SubmitButton textButton={address ? "Update" : "Add"} />
-                </div>
-            </form>
+            </div>
         </div>
     )
 }

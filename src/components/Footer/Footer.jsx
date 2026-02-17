@@ -8,7 +8,7 @@ function Footer() {
     const { isDarkMode } = useTheme();
 
     return (
-        <footer className={`!p-6 text-center mx-auto w-full bg-amber-700 border-t-2 border-t-black ${isDarkMode ? 'text-black' : 'text-white'}`}>
+        <footer className={`!p-6 text-center mx-auto w-full bg-[#588157] border-t-2 border-t-black ${isDarkMode ? 'text-black' : 'text-white'}`}>
             <div className="grid grid-cols-1 gap-8 px-4 py-6 lg:py-8 md:grid-cols-3 justify-between">
                 <div>
                     <h2 className="md:text-sm text-xs font-semibold text-heading uppercase text-left">Store Information:</h2>

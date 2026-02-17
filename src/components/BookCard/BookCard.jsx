@@ -18,7 +18,7 @@ function BookCard({ book }) {
 
     return (
         <div className="relative">
-            <div className="flex flex-col items-center w-full min-h-80 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl mx-5!">
+            <div className="flex flex-col items-center w-full min-h-80 border-3 border-[#ffb703]  bg-[#f8f6f0] shadow-2xl shadow-[#dad7cd] rounded-2xl mx-5!">
                 <img
                     className="w-40 h-60 rounded-b-xl"
                     src={book?.image_link ? `${book.image_link}`

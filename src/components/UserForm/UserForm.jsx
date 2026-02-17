@@ -3,6 +3,7 @@ import { useAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import SubmitButton from "../SubmitButton/SubmitButton";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 function UserForm({ submitFunction, isRegisterForm }) {
 
@@ -69,7 +70,7 @@ function UserForm({ submitFunction, isRegisterForm }) {
 
     return (
         <div className="my-20! flex flex-col wrap-normal items-center gap-7">
-            <form className="flex flex-col w-full md:w-1/2 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8! mx-30!"
+            <form className="flex flex-col items-center w-full md:w-1/2 border-3 border-[#ffb703]  bg-[#f8f6f0] shadow-2xl shadow-[#dad7cd] rounded-2xl p-8! mx-30!"
                 onSubmit={handleSubmit}>
                 <p className='text-black font-bold'>{isRegisterForm ? "Register" : "Update Profile"}</p>
                 <hr className="h-px my-3! text-gray-500 border w-9/10 col-span-2" />
@@ -158,6 +159,9 @@ function UserForm({ submitFunction, isRegisterForm }) {
                 </div>
                 <div className="w-9/10 p-5!">
                     <SubmitButton textButton={isRegisterForm ? "Register" : "Update"} />
+                </div>
+                <div className="w-9/10 pb-5!">
+                    <DeleteButton textButton={isRegisterForm ? "Cancel Register" : "Cancel Update"} handleClick={isRegisterForm ? (() => { navigate('/') }) : (() => { navigate('/profile') })} />
                 </div>
             </form>
         </div>

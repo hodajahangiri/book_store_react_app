@@ -68,8 +68,8 @@ function ReviewCard({ review, bookId, setExistedUserReview }) {
                     {
                         isUserReview &&
                         <div className="flex flex-row gap-4 mr-4!">
-                            <EditIcon value={""} className='text-blue-700 cursor-pointer' onClick={() => handleEditClick(review)} />
-                            <DeleteIcon className='text-red-800 cursor-pointer' onClick={() => handleDeleteClick(review?.id)} />
+                            <EditIcon value={""} className='text-[#3a5a40] cursor-pointer' onClick={() => handleEditClick(review)} />
+                            <DeleteIcon className='text-[#ae2012] cursor-pointer' onClick={() => handleDeleteClick(review?.id)} />
                         </div>
                     }
                 </div>

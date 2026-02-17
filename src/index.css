@@ -6,13 +6,13 @@
 }
 
 .darkMode {
-  background-color: rgb(67, 67, 67);
-  color: White;
+  background-color: #344e41;
+  color: #f8f9fa;
 }
 
 .lightMode {
-  background-color: white;
-  color: black;
+  background-color: #f8f9fa;
+  color: #344e41;
 }
 
 :root {

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import SubmitButton from "../SubmitButton/SubmitButton";
+import DeleteButton from "../DeleteButton/DeleteButton";
 
 function PaymentForm({ submitFunction, payment, isAddForm }) {
 
@@ -76,80 +77,85 @@ function PaymentForm({ submitFunction, payment, isAddForm }) {
 
     return (
         <div className="my-20! flex flex-col wrap-normal items-center gap-7">
-            <form className="flex flex-col w-full md:w-1/2 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8! mx-30!"
-                onSubmit={handleSubmit}>
-                <p className='text-black font-bold'>{isAddForm ? "Add Card" : "Update Card"}</p>
-                <hr className="h-px my-3! text-gray-500 border w-9/10 col-span-2" />
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="card_number">
-                        Card Number
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="card_number"
-                        id="card_number"
-                        type="text"
-                        placeholder="####-####-####-####"
-                        required
-                        onChange={handleChange}
-                        value={formData.card_number} />
+            <div className="flex flex-col w-full md:w-1/2 border-3 border-[#ffb703]  bg-[#f8f6f0] shadow-2xl shadow-[#dad7cd] rounded-2xl p-8! mx-30!">
+                <form className="flex flex-col w-full"
+                    onSubmit={handleSubmit}>
+                    <p className='text-black font-bold'>{isAddForm ? "Add Card" : "Update Card"}</p>
+                    <hr className="h-px my-3! text-gray-500 border w-9/10 col-span-2" />
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="card_number">
+                            Card Number
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="card_number"
+                            id="card_number"
+                            type="text"
+                            placeholder="####-####-####-####"
+                            required
+                            onChange={handleChange}
+                            value={formData.card_number} />
+                    </div>
+                    {formError.card_number && <p className="text-red-800"> {formError.card_number}</p>}
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="cvv">
+                            CVV
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="cvv"
+                            id="cvv"
+                            type="number"
+                            placeholder="CVV"
+                            onChange={handleChange}
+                            value={formData.cvv} />
+                    </div>
+                    {formError.cvv && <p className="text-red-800"> {formError.cvv}</p>}
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="expiry_month">
+                            Exp_Month:
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="expiry_month"
+                            id="expiry_month"
+                            type="number"
+                            placeholder="1-12"
+                            onChange={handleChange}
+                            value={formData.expiry_month} />
+                    </div>
+                    {formError.expiry_month && <p className="text-red-800"> {formError.expiry_month}</p>}
+                    <div className="w-9/10 p-5!">
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="expiry_year">
+                            Exp_Year:
+                        </label>
+                        <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
+                            name="expiry_year"
+                            id="expiry_year"
+                            type="number"
+                            placeholder="Exp Year : 2026"
+                            onChange={handleChange}
+                            value={formData.expiry_year} />
+                    </div>
+                    {formError.expiry_year && <p className="text-red-800"> {formError.expiry_year}</p>}
+                    <div className="flex gap-3 w-9/10 p-5!">
+                        <input className="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft"
+                            name="is_default"
+                            id="is_default"
+                            type="checkbox"
+                            placeholder="1-12"
+                            onChange={handleChange}
+                            value={formData.is_default} />
+                        <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="is_default">
+                            Is this card your primary card?
+                        </label>
+                    </div>
+                    <div className="w-9/10 p-5!">
+                        <SubmitButton textButton={payment ? "Update" : "Add"} />
+                    </div>
+                </form>
+                <div className="w-9/10 pb-5!">
+                    <DeleteButton textButton={"Cancel"} handleClick={() => { navigate('/profile') }} />
                 </div>
-                {formError.card_number && <p className="text-red-800"> {formError.card_number}</p>}
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="cvv">
-                        CVV
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="cvv"
-                        id="cvv"
-                        type="number"
-                        placeholder="CVV"
-                        onChange={handleChange}
-                        value={formData.cvv} />
-                </div>
-                {formError.cvv && <p className="text-red-800"> {formError.cvv}</p>}
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="expiry_month">
-                        Exp_Month:
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="expiry_month"
-                        id="expiry_month"
-                        type="number"
-                        placeholder="1-12"
-                        onChange={handleChange}
-                        value={formData.expiry_month} />
-                </div>
-                {formError.expiry_month && <p className="text-red-800"> {formError.expiry_month}</p>}
-                <div className="w-9/10 p-5!">
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="expiry_year">
-                        Exp_Year:
-                    </label>
-                    <input className="shadow appearance-none border rounded w-full p-3! text-gray-700 bg-white leading-tight focus:outline-none focus:shadow-outline"
-                        name="expiry_year"
-                        id="expiry_year"
-                        type="number"
-                        placeholder="Exp Year : 2026"
-                        onChange={handleChange}
-                        value={formData.expiry_year} />
-                </div>
-                {formError.expiry_year && <p className="text-red-800"> {formError.expiry_year}</p>}
-                <div className="flex gap-3 w-9/10 p-5!">
-                    <input className="w-4 h-4 border border-default-medium rounded-xs bg-neutral-secondary-medium focus:ring-2 focus:ring-brand-soft"
-                        name="is_default"
-                        id="is_default"
-                        type="checkbox"
-                        placeholder="1-12"
-                        onChange={handleChange}
-                        value={formData.is_default} />
-                    <label className="block text-gray-700 text-sm font-bold mb-2!" htmlFor="is_default">
-                        Is this card your primary card?
-                    </label>
-                </div>
-                <div className="w-9/10 p-5!">
-                    <SubmitButton textButton={payment ? "Update" : "Add"} />
-                </div>
-            </form>
-        </div>
+            </div>
+        </div >
     )
 }
 

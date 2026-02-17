@@ -21,7 +21,7 @@ function AddressCard({ addressList }) {
   return (
     <>
       <p className="font-bold">Addresses</p>
-      <div className="flex flex-col gap-5 w-full md:w-3/4 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-8!">
+      <div className="flex flex-col gap-5 w-full md:w-3/4 border-3 border-[#ffb703]  bg-[#f8f6f0] shadow-2xl shadow-[#dad7cd] rounded-2xl p-8!">
         {addressList.length > 0 ?
           addressList.map((address) => (
             <div key={address?.id} id={address?.id} className="flex flew-row justify-between shadow border rounded-md w-full p-2! text-black bg-white">
@@ -31,8 +31,8 @@ function AddressCard({ addressList }) {
                 }
               </div>
               <div className="flex flex-row gap-4 mr-4!">
-                <EditIcon value={address} className='text-blue-700 cursor-pointer' onClick={() => handleEditClick(address)} />
-                <DeleteIcon className='text-red-800 cursor-pointer' onClick={() => deleteAddress(address?.id)} />
+                <EditIcon value={address} className='text-[#3a5a40] cursor-pointer' onClick={() => handleEditClick(address)} />
+                <DeleteIcon className='text-[#ae2012] cursor-pointer' onClick={() => deleteAddress(address?.id)} />
               </div>
             </div>
           ))

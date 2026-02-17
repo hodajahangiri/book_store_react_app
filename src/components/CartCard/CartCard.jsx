@@ -8,7 +8,7 @@ function CartCard({ cartBook, idx }) {
 
     return (
         <div className='flex flex-col items-center w-full px-5! my-2!'>
-            <div className="flex flex-col justify-center w-full h-25 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl">
+            <div className="flex flex-col justify-center w-full h-25 border-3 border-[#ffb703]  bg-[#f8f6f0] shadow-2xl shadow-[#dad7cd] rounded-2xl">
                 <div className='grid grid-cols-9 gap-4 w-full place-items-center px-5!'>
                     <div className='col-span-1 text-black hidden md:block'>{idx}</div>
                     <div className='col-span-2'>

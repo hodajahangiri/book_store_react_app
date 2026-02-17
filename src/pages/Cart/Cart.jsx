@@ -2,6 +2,8 @@ import { useEffect } from "react";
 import { useCart } from "../../contexts/CartContext";
 import CartCard from "../../components/CartCard/CartCard";
 import { useNavigate } from "react-router-dom";
+import EditButton from "../../components/EditButton/EditButton";
+import DeleteButton from "../../components/DeleteButton/DeleteButton";
 
 function Cart({ loading, setLoading }) {
 
@@ -41,10 +43,12 @@ function Cart({ loading, setLoading }) {
       {cartItems.length > 0 &&
         <div className='flex flex-col items-center w-full px-5! mt-9!'>
           <div className='col-span-2 text-black font-bold mb-6!'>Total: ${total.toFixed(2)}</div>
-          <button className="w-full self-center bg-green-600 hover:bg-green-800 text-white font-extrabold py-2! px-4! rounded-xl cursor-pointer"
-            onClick={() => navigate('/checkout')}>
-            Checkout
-          </button>
+          <div className="w-full self-center">
+            <EditButton textButton="Checkout" handleClick={() => navigate('/checkout')} />
+          </div>
+          <div className="w-full self-center">
+            <DeleteButton textButton="Back to Home" handleClick={() => navigate('/')} />
+          </div>
         </div>
       }
     </div>

@@ -42,7 +42,7 @@ function ContactForm() {
                     placeholder="Email"
                     required
                     onChange={handleChange}
-                    value={formData.full_name} />
+                    value={formData.email} />
                 <input className="shadow appearance-none border rounded w-full p-2! text-gray-700 bg-white leading-tight"
                     name="message"
                     id="message"
@@ -50,7 +50,7 @@ function ContactForm() {
                     placeholder="Message"
                     required
                     onChange={handleChange}
-                    value={formData.full_name} />
+                    value={formData.message} />
                 <SubmitButton textButton="Contact Us" />
             </form>
         </div>

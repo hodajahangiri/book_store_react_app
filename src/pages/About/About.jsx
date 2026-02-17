@@ -8,7 +8,7 @@ function About() {
     <>
       <LayoutPhoto />
       <div className='flex flex-col items-center w-full'>
-        <div className="flex flex-col my-15! mx-5!  md:w-3/4 min-h-100 border-2 border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl p-3!">
+        <div className="flex flex-col my-15! mx-5!  md:w-3/4 min-h-100 border-3 border-[#ffb703]  bg-[#f8f6f0] shadow-2xl shadow-[#dad7cd] rounded-2xl p-3!">
           <p className='text-black font-bold'>ABOUT US</p>
           <hr className="h-px my-3! text-black border w-full col-span-2" />
           <div className='grid grid-cols-1 md:grid-cols-2 place-items-center pt-3!'>

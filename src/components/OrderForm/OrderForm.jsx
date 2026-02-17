@@ -62,7 +62,7 @@ function OrderForm({ cartId, userAddresses, userPaymentMethods }) {
     }
 
     return (
-        <form onSubmit={handleSubmit} className="grid grid-col-1 md:grid-cols-2 border-2 w-full border-amber-500  bg-[#f6f3e4] shadow-2xl shadow-amber-200 rounded-2xl mb-15!">
+        <form onSubmit={handleSubmit} className="grid grid-col-1 md:grid-cols-2 w-full border-3 border-[#ffb703]  bg-[#f8f6f0] shadow-2xl shadow-[#dad7cd] rounded-2xl mb-15!">
             <div className="flex flex-col items-start mt-6! my-5!">
                 <p className="mx-3! font-bold text-black">Shipping Address</p>
                 <hr className="h-px my-3! mx-3! text-gray-500 border w-3/4 col-span-2" />
