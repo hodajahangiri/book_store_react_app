@@ -41,7 +41,7 @@ function Favorites({ loading, setLoading }) {
 
   return (
     <>
-      {favoritesBooks ? <BookList books={favoritesBooks} loading={loading} />
+      {favoritesBooks ? <BookList books={favoritesBooks} loading={loading} IsSearch={true}/>
         :
         <div className="font-bold text-2xl flex flex-col items-center">
           <span>No Book Selected!!!!</span>
