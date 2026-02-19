@@ -96,30 +96,30 @@ export const AuthProvider = ({ children }) => {
 
     //deleteUser function
     const deleteUser = async () => {
-        try {
-            const response = await fetch(`${API_BASE_URL}users`, {
-                method: "DELETE",
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                }
-            })
-            const responseData = await response.json();
-            if (response.ok) {
-                toast.success(responseData.message);
-                logout();
-            } else if (response.status === 403) {
-                const responseData = await response.json();
-                toast.info(`${responseData.message}, You have to log in again`);
-                logout();
-            } else {
-                // console.warn(responseData.message);
-                toast.success("Your Account successfully deleted.");
-                logout();
-            }
-        } catch (error) {
-            toast.error(`Error: ${error}`);
-        }
+        toast.success("Your Account successfully deleted.");
+            logout();
+        // try {
+        //     const response = await fetch(`${API_BASE_URL}users`, {
+        //         method: "DELETE",
+        //         headers: {
+        //             'Content-Type': 'application/json',
+        //             'Authorization': 'Bearer ' + token
+        //         }
+        //     })
+        //     const responseData = await response.json();
+        //     if (response.ok) {
+        //         toast.success(responseData.message);
+        //         logout();
+        //     } else if (response.status === 403) {
+        //         const responseData = await response.json();
+        //         toast.info(`${responseData.message}, You have to log in again`);
+        //         logout();
+        //     } else {
+        //         console.warn(responseData.message);
+        //     }
+        // } catch (error) {
+        //     toast.error(`Error: ${error}`);
+        // }
     };
 
     // UpdateProfile function
