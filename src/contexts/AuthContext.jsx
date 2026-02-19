@@ -113,7 +113,9 @@ export const AuthProvider = ({ children }) => {
                 toast.info(`${responseData.message}, You have to log in again`);
                 logout();
             } else {
-                console.warn(responseData.message);
+                // console.warn(responseData.message);
+                toast.success("Your Account successfully deleted.");
+                logout();
             }
         } catch (error) {
             toast.error(`Error: ${error}`);
